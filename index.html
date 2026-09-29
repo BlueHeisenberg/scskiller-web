@@ -1,0 +1,422 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SCSKiller: kill shader stutter before you play</title>
+<meta name="description" content="SCSKiller compiles your games' DirectX 12 shaders before you play, so they don't compile mid-game. Free and open source, for Windows.">
+<meta name="theme-color" content="#05070a">
+<meta name="color-scheme" content="dark">
+<meta property="og:title" content="SCSKiller: Shader Compilation Stutter Killer">
+<meta property="og:description" content="Compiles your games' shaders into the driver's cache before you play, so the game doesn't stop to compile them mid-game. Free and open source.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://scskiller.com/">
+<link rel="canonical" href="https://scskiller.com/">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/site.css">
+<script>document.documentElement.classList.add('js')</script>
+<script src="/assets/bg.js" defer></script>
+<script src="/assets/site.js" defer></script>
+</head>
+<body class="home">
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="/"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M18 4 7 18h8l-2 10 12-15h-8l2-9z" fill="none" stroke="#4cc2ff" stroke-width="2.2" stroke-linejoin="round"/></svg>SCSKiller</a>
+    <nav class="nav" aria-label="Main">
+      <a href="#why">Why it stutters</a>
+      <a href="#how">How it works</a>
+      <a href="#results">Results</a>
+      <a href="#faq">FAQ</a>
+      <a class="keep" href="/support/">Support</a>
+      <a class="btn btn-primary" href="#download" data-dl>Download</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+  <section class="hero">
+    <div class="stage" aria-hidden="true">
+      <canvas class="scene"></canvas>
+      <div class="ms-label">20 ms</div>
+    </div>
+    <div class="wrap hero-copy hero-grid">
+      <div class="hero-text">
+        <span class="eyebrow"><i class="dot"></i>Shader Compilation Stutter Killer</span>
+        <h1>Kill shader <span class="jolt" data-text="stutter">stutter</span> <span class="hl">before you play.</span></h1>
+        <p class="lede">SCSKiller builds your games' shaders ahead of time, so the game doesn't stop to compile them while you play.</p>
+        <div class="cta">
+          <a class="btn btn-primary btn-shine" href="#download" data-dl>Download <small data-soon>coming soon</small></a>
+          <a class="btn" href="#why">Why games stutter</a>
+        </div>
+        <ul class="chips" aria-label="At a glance">
+          <li>Free and open source</li>
+          <li>Windows · DirectX 12</li>
+          <li>NVIDIA · AMD</li>
+        </ul>
+      </div>
+      <aside class="overlay" data-overlay aria-hidden="true">
+        <div class="ov-top"><i class="ov-dot"></i><b data-o="state">SCSKiller off</b><span class="ov-api">D3D12</span></div>
+        <div class="ov-fps"><span data-o="fps">111</span><small>FPS</small></div>
+        <dl class="ov-rows">
+          <div><dt>Frame time</dt><dd><span data-o="ms">9.0</span> ms</dd></div>
+          <div class="ov-low"><dt>1% low</dt><dd><span data-o="low">100</span> fps</dd></div>
+          <div class="ov-low"><dt>0.1% low</dt><dd><span data-o="low01">95</span> fps</dd></div>
+          <div class="ov-hitch"><dt>Hitches ≥ 20 ms</dt><dd data-o="hitch">0</dd></div>
+          <div class="ov-cache"><dt>Shader cache</dt><dd data-o="cache">cold</dd></div>
+        </dl>
+        <canvas class="ov-graph"></canvas>
+        <p class="ov-note">Simulated overlay. Measured compile stalls below.</p>
+      </aside>
+    </div>
+    <a class="scroll-cue" href="#why" aria-label="Scroll to why games stutter"><span></span></a>
+  </section>
+
+  <section id="why" class="sec">
+    <div class="wrap">
+      <header class="sec-head" data-reveal>
+        <div>
+          <span class="kicker">Why it stutters</span>
+          <h2>The frame waits for a compile.</h2>
+        </div>
+        <div>
+          <p class="lead">When a game meets a new effect, your GPU driver has to compile its shader right then, and the frame waits for it. That's the hitch.</p>
+          <p class="lead strong">SCSKiller compiles them before you play.</p>
+        </div>
+      </header>
+      <figure class="ftchart" data-reveal aria-label="Illustration: with a cold cache the game stops for a shader compile and a frame shoots past 20 ms; with SCSKiller the shaders are compiled before launch and every frame stays short.">
+        <div class="ft-legend" aria-hidden="true">
+          <span class="lg-amber">Cold cache</span>
+          <span class="lg-cyan">With SCSKiller</span>
+          <span class="lg-thr">20 ms: above it, a hitch</span>
+        </div>
+        <div class="lanes" aria-hidden="true">
+          <div class="lane cold">
+            <span class="lane-name">Cold cache</span>
+            <div class="plot">
+              <div class="pre"></div>
+              <div class="bars"><i style="--h:11.5%"></i><i style="--h:10.7%"></i><i style="--h:13.0%"></i><i class="hi" style="--h:34.3%"></i><i style="--h:15.7%"></i><i style="--h:11.7%"></i><i style="--h:10.3%"></i><i style="--h:12.3%"></i><i style="--h:10.2%"></i><i style="--h:12.0%"></i><i style="--h:10.3%"></i><i style="--h:10.4%"></i><i style="--h:11.9%"></i><i style="--h:13.8%"></i><i style="--h:10.6%"></i><i style="--h:11.0%"></i><i style="--h:12.9%"></i><i style="--h:14.3%"></i><i style="--h:12.6%"></i><i style="--h:11.8%"></i><i style="--h:14.5%"></i><i class="hi" style="--h:88.6%"><b>compile</b></i><i style="--h:21.4%"></i><i style="--h:11.3%"></i><i style="--h:10.7%"></i><i style="--h:10.5%"></i><i style="--h:11.4%"></i><i style="--h:13.7%"></i><i style="--h:10.8%"></i><i style="--h:12.7%"></i><i style="--h:12.9%"></i><i style="--h:11.7%"></i><i style="--h:12.5%"></i><i style="--h:10.3%"></i><i style="--h:10.3%"></i><i style="--h:10.9%"></i><i style="--h:13.1%"></i><i style="--h:12.0%"></i><i style="--h:11.4%"></i><i style="--h:12.7%"></i><i style="--h:12.1%"></i><i style="--h:11.4%"></i><i style="--h:13.6%"></i><i class="hi" style="--h:48.6%"></i><i style="--h:11.1%"></i><i style="--h:12.6%"></i><i style="--h:12.4%"></i><i style="--h:14.0%"></i><i style="--h:13.3%"></i><i style="--h:11.3%"></i><i style="--h:14.5%"></i><i style="--h:10.5%"></i><i style="--h:11.9%"></i><i style="--h:13.5%"></i><i style="--h:10.7%"></i><i style="--h:12.2%"></i><i style="--h:10.2%"></i><i style="--h:13.1%"></i><i style="--h:13.5%"></i><i style="--h:12.6%"></i></div>
+              <span class="thr"><b>20 ms</b></span>
+            </div>
+          </div>
+          <div class="lane warm">
+            <span class="lane-name">With SCSKiller</span>
+            <div class="plot">
+              <div class="pre"><span>compiled<br>before launch</span></div>
+              <div class="bars"><i style="--h:14.0%"></i><i style="--h:11.4%"></i><i style="--h:13.2%"></i><i style="--h:12.7%"></i><i style="--h:12.7%"></i><i style="--h:12.1%"></i><i style="--h:13.8%"></i><i style="--h:14.3%"></i><i style="--h:12.2%"></i><i style="--h:13.0%"></i><i style="--h:10.3%"></i><i style="--h:13.2%"></i><i style="--h:13.0%"></i><i style="--h:14.5%"></i><i style="--h:13.8%"></i><i style="--h:11.3%"></i><i style="--h:11.8%"></i><i style="--h:13.1%"></i><i style="--h:10.1%"></i><i style="--h:12.1%"></i><i style="--h:10.8%"></i><i style="--h:10.5%"></i><i style="--h:10.3%"></i><i style="--h:13.5%"></i><i style="--h:10.6%"></i><i style="--h:11.1%"></i><i style="--h:11.8%"></i><i style="--h:14.0%"></i><i style="--h:10.4%"></i><i style="--h:12.1%"></i><i style="--h:12.5%"></i><i style="--h:14.0%"></i><i style="--h:13.7%"></i><i style="--h:13.9%"></i><i style="--h:11.3%"></i><i style="--h:11.9%"></i><i style="--h:11.6%"></i><i style="--h:14.0%"></i><i style="--h:14.4%"></i><i style="--h:10.7%"></i><i style="--h:10.8%"></i><i style="--h:11.1%"></i><i style="--h:11.1%"></i><i style="--h:12.2%"></i><i style="--h:12.7%"></i><i style="--h:11.2%"></i><i style="--h:10.0%"></i><i style="--h:11.9%"></i><i style="--h:11.7%"></i><i style="--h:12.6%"></i><i style="--h:14.4%"></i><i style="--h:13.2%"></i><i style="--h:12.4%"></i><i style="--h:12.8%"></i><i style="--h:13.1%"></i><i style="--h:10.2%"></i><i style="--h:14.1%"></i><i style="--h:13.6%"></i><i style="--h:14.0%"></i><i style="--h:13.6%"></i></div>
+              <span class="thr"><b>20 ms</b></span>
+            </div>
+          </div>
+          <div class="t-axis"><span class="t-launch">game launches</span><span class="t-time">time</span></div>
+        </div>
+        <figcaption>Illustration. Each bar is a frame.</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section id="how" class="sec showcase">
+    <div class="wrap">
+      <header class="sec-head" data-reveal>
+        <div>
+          <span class="kicker">How it works</span>
+          <h2>Pick your games. Press Compile.</h2>
+        </div>
+        <div>
+          <p class="lead">Three steps, with the game closed.</p>
+        </div>
+      </header>
+
+      <div class="feature" data-reveal>
+        <div class="feature-text">
+          <span class="step">01</span>
+          <h3>Scan</h3>
+          <p class="lead">Finds your games and the shaders they ship with.</p>
+          <ul class="spec">
+            <li>Games grouped by store</li>
+            <li>Shader and pipeline counts, cache size, compile time</li>
+            <li>A status such as <em>Ready to compile</em> or <em>Warmed</em></li>
+          </ul>
+        </div>
+        <figure class="window">
+          <img src="/assets/img/library.webp" width="1264" height="871" loading="lazy" decoding="async"
+               alt="SCSKiller's library: games grouped by store, with shader and pipeline counts, cache size, compile time and a status such as Ready to compile or Warmed.">
+          <svg class="caps" viewBox="0 0 138 34" aria-hidden="true"><path d="M18 17h10M65 12h9v9h-9zM110 12l10 10M120 12l-10 10"/></svg>
+        </figure>
+      </div>
+
+      <div class="feature flip" data-reveal>
+        <div class="feature-text">
+          <span class="step">02</span>
+          <h3>Plan</h3>
+          <p class="lead">Works out which pipelines each game will build.</p>
+          <ul class="spec">
+            <li>Warmed for the current driver</li>
+            <li>Pipeline and shader counts, cache size, compile time</li>
+            <li>The optional recorder switch</li>
+          </ul>
+          <p class="aside">Gaps get filled by an optional recording while you play. Anti-cheat games are never launched, injected into, or given the recorder.</p>
+        </div>
+        <figure class="window">
+          <img src="/assets/img/detail.webp" width="1264" height="871" loading="lazy" decoding="async"
+               alt="A game's detail page: warmed for the current driver, pipeline and shader counts, cache size, compile time, and the optional recorder switch.">
+          <svg class="caps" viewBox="0 0 138 34" aria-hidden="true"><path d="M18 17h10M65 12h9v9h-9zM110 12l10 10M120 12l-10 10"/></svg>
+        </figure>
+      </div>
+
+      <div class="feature" data-reveal>
+        <div class="feature-text">
+          <span class="step">03</span>
+          <h3>Compile</h3>
+          <p class="lead">Builds them into your driver's cache, where the game finds them.</p>
+          <ul class="spec">
+            <li>Progress and pipelines per second</li>
+            <li>Games wait their turn in the queue</li>
+            <li>Finished games stay listed with what failed or was skipped</li>
+          </ul>
+        </div>
+        <figure class="window">
+          <img src="/assets/img/queue.webp" width="1264" height="871" loading="lazy" decoding="async"
+               alt="The compile queue: one game compiling at 56 percent with pipelines per second, three games waiting, one finished.">
+          <svg class="caps" viewBox="0 0 138 34" aria-hidden="true"><path d="M18 17h10M65 12h9v9h-9zM110 12l10 10M120 12l-10 10"/></svg>
+        </figure>
+      </div>
+      <p class="fine center" data-reveal>Library, game details and compile queue. Sample data.</p>
+    </div>
+  </section>
+
+  <section id="results" class="sec">
+    <div class="wrap">
+      <header class="sec-head" data-reveal>
+        <div>
+          <span class="kicker">Results</span>
+          <h2>Compile stalls, before and after.</h2>
+        </div>
+        <div>
+          <p class="lead">Each game played on a cold cache, then again after SCSKiller compiled its shaders. Measured with SCSKiller's pipeline recorder.</p>
+        </div>
+      </header>
+      <figure class="rchart" data-reveal>
+        <div class="rt-grid">
+          <div class="rt">
+            <div class="rt-head"><h3>Final Fantasy VII Rebirth</h3></div>
+            <div class="rt-scroll">
+              <table>
+                <thead><tr><th></th><th scope="col" class="a">Cold</th><th scope="col" class="c">With SCSKiller</th></tr></thead>
+                <tbody>
+                  <tr class="grp"><th colspan="3">NVIDIA RTX 5090</th></tr>
+                  <tr class="key"><th scope="row">Stutters (≥&nbsp;20&nbsp;ms)</th><td>19</td><td>0</td></tr>
+                  <tr class="key"><th scope="row">Worst stall</th><td>76 ms</td><td>5 ms</td></tr>
+                  <tr class="grp"><th colspan="3">AMD Ryzen AI Max+ 395 (Strix Halo)</th></tr>
+                  <tr class="key"><th scope="row">Stutters (≥&nbsp;20&nbsp;ms)</th><td>162</td><td>0</td></tr>
+                  <tr class="key"><th scope="row">Worst stall</th><td>291 ms</td><td>7 ms</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="rt">
+            <div class="rt-head"><h3>Silent Hill: Townfall</h3></div>
+            <div class="rt-scroll">
+              <table>
+                <thead><tr><th></th><th scope="col" class="a">Cold</th><th scope="col" class="c">With SCSKiller</th></tr></thead>
+                <tbody>
+                  <tr class="grp"><th colspan="3">NVIDIA RTX 5090</th></tr>
+                  <tr class="key"><th scope="row">Stutters (≥&nbsp;20&nbsp;ms)</th><td>24</td><td>0</td></tr>
+                  <tr class="key"><th scope="row">Worst stall</th><td>347 ms</td><td>8 ms</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="rt">
+            <div class="rt-head"><h3>Hogwarts Legacy</h3></div>
+            <div class="rt-scroll">
+              <table>
+                <thead><tr><th></th><th scope="col" class="a">Cold</th><th scope="col" class="c">With SCSKiller</th></tr></thead>
+                <tbody>
+                  <tr class="grp"><th colspan="3">NVIDIA RTX 5090</th></tr>
+                  <tr class="key"><th scope="row">Stutters (≥&nbsp;20&nbsp;ms)</th><td>1,014</td><td>87</td></tr>
+                  <tr class="key"><th scope="row">Worst stall</th><td>2,400 ms</td><td>100 ms</td></tr>
+                  <tr class="grp"><th colspan="3">AMD Ryzen AI Max+ 395 (Strix Halo)</th></tr>
+                  <tr class="key"><th scope="row">Stutters (≥&nbsp;20&nbsp;ms)</th><td>27,743</td><td>206</td></tr>
+                  <tr class="key"><th scope="row">Worst stall</th><td>2,146 ms</td><td>104 ms</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="rt">
+            <div class="rt-head"><h3>Tiny Tina's Wonderlands</h3></div>
+            <div class="rt-scroll">
+              <table>
+                <thead><tr><th></th><th scope="col" class="a">Cold</th><th scope="col" class="c">With SCSKiller</th></tr></thead>
+                <tbody>
+                  <tr class="grp"><th colspan="3">NVIDIA RTX 5090</th></tr>
+                  <tr class="key"><th scope="row">Stutters (≥&nbsp;20&nbsp;ms)</th><td>583</td><td>0</td></tr>
+                  <tr class="key"><th scope="row">Worst stall</th><td>315 ms</td><td>13 ms</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="rt">
+            <div class="rt-head"><h3>Star Wars Jedi: Survivor</h3></div>
+            <div class="rt-scroll">
+              <table>
+                <thead><tr><th></th><th scope="col" class="a">Cold</th><th scope="col" class="c">With SCSKiller</th></tr></thead>
+                <tbody>
+                  <tr class="grp"><th colspan="3">NVIDIA RTX 5090</th></tr>
+                  <tr class="key"><th scope="row">Stutters (≥&nbsp;20&nbsp;ms)</th><td>9,038</td><td>11</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+        <figcaption class="fine">A stutter is a shader compile the game had to wait 20 ms or more for. Your numbers will vary by game, GPU and driver.</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section id="limits" class="sec">
+    <div class="wrap">
+      <header class="sec-head" data-reveal>
+        <div>
+          <span class="kicker">Limits</span>
+          <h2>What it fixes, and what it can't.</h2>
+        </div>
+      </header>
+      <div class="limits" data-reveal>
+        <div class="lim yes">
+          <h3><span class="ic" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M3 8.5 6.5 12 13 4.5"/></svg></span>Fixes</h3>
+          <p>Shader compilation stutter.</p>
+        </div>
+        <div class="lim no">
+          <h3><span class="ic" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M4 4l8 8M12 4l-8 8"/></svg></span>Can't fix</h3>
+          <p>Traversal and streaming stutter, or hitches with other causes.</p>
+        </div>
+        <p class="lim-note"><span class="ic" aria-hidden="true">~</span><strong>Now and then</strong> A shader it couldn't find or record can still compile in game.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="faq" class="sec">
+    <div class="wrap faq-grid">
+      <header data-reveal>
+        <span class="kicker">FAQ</span>
+        <h2>Quick answers.</h2>
+      </header>
+      <div class="qa" data-reveal>
+        <details open><summary>Anti-cheat games?</summary><p>SCSKiller never launches them, injects into them, or gives them the recorder. It only reads their files.</p></details>
+        <details><summary>Does it run while I play?</summary><p>It doesn't need to. The game reads the driver's cache on its own.</p></details>
+        <details><summary>Will Windows warn me?</summary><p>Probably, the first time. The first release isn't code-signed yet; signing is in progress. <a href="#dl-notice" data-notice>Show me</a></p></details>
+        <details><summary>Does it touch game files or drivers?</summary><p>It doesn't patch either. Only the optional recorder adds a small <code>d3d12.dll</code> and its settings file to a game folder, and turning it off removes both.</p></details>
+        <details><summary>What about driver updates?</summary><p>An update clears the shader cache. SCSKiller notices and compiles again, on its own if you let it.</p></details>
+        <details><summary>Do I need an account?</summary><p>No. Signing in with Patreon only adds the <a href="/support/">supporter features</a>.</p></details>
+      </div>
+    </div>
+  </section>
+
+  <section id="download" class="sec dl">
+    <div class="dl-floor" aria-hidden="true"></div>
+    <div class="wrap dl-grid">
+      <div class="dl-text" data-reveal>
+        <span class="dl-icon" aria-hidden="true"><svg viewBox="0 0 32 32"><path d="M18 4 7 18h8l-2 10 12-15h-8l2-9z"/></svg></span>
+        <h2><span data-soon>Coming soon.</span><span data-live>Get SCSKiller.</span></h2>
+        <p class="lead">The whole app is free. Open source, GPL-3.0-or-later. You don't need an account to use it.</p>
+        <!-- Download: RELEASED and DOWNLOAD_URL in assets/site.js. Every Download button opens the
+        "Windows may warn you" notice (#dl-notice), which then downloads. -->
+        <a class="btn btn-primary btn-shine btn-xl" role="link" aria-disabled="true" data-dl>
+          <svg class="win" viewBox="0 0 16 16" aria-hidden="true"><path d="M0 0h7.5v7.5H0zM8.5 0H16v7.5H8.5zM0 8.5h7.5V16H0zM8.5 8.5H16V16H8.5z"/></svg>
+          <span data-soon>Coming soon</span><span data-live>Download for Windows</span>
+        </a>
+        <p class="dl-meta"><span data-soon>First release on GitHub. </span>Windows, 64-bit.</p>
+        <ul class="dl-links">
+          <li data-live>Not code-signed yet, so Windows may warn you once. <a href="#dl-notice" data-notice>Show me</a></li>
+          <li><a href="/code-signing-policy/">Code signing policy</a></li>
+          <li><a href="/support/">How supporting works <span aria-hidden="true">→</span></a></li>
+        </ul>
+      </div>
+      <div class="dl-stack" aria-hidden="true">
+        <figure class="window w3"><img src="/assets/img/queue.webp" width="1264" height="871" loading="lazy" decoding="async" alt=""><svg class="caps" viewBox="0 0 138 34" aria-hidden="true"><path d="M18 17h10M65 12h9v9h-9zM110 12l10 10M120 12l-10 10"/></svg></figure>
+        <figure class="window w2"><img src="/assets/img/detail.webp" width="1264" height="871" loading="lazy" decoding="async" alt=""><svg class="caps" viewBox="0 0 138 34" aria-hidden="true"><path d="M18 17h10M65 12h9v9h-9zM110 12l10 10M120 12l-10 10"/></svg></figure>
+        <figure class="window w1"><img src="/assets/img/library.webp" width="1264" height="871" loading="lazy" decoding="async" alt=""><svg class="caps" viewBox="0 0 138 34" aria-hidden="true"><path d="M18 17h10M65 12h9v9h-9zM110 12l10 10M120 12l-10 10"/></svg></figure>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div>
+      <a class="brand" href="/"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M18 4 7 18h8l-2 10 12-15h-8l2-9z" fill="none" stroke="#4cc2ff" stroke-width="2.2" stroke-linejoin="round"/></svg>SCSKiller</a>
+      <p class="note">Free and open source (GPL-3.0-or-later). Not affiliated with any GPU maker, engine maker or game publisher. <a href="/legal/#trademarks">Trademarks</a>.</p>
+    </div>
+    <nav aria-label="Footer">
+      <ul>
+        <li><a href="https://github.com/BlueHeisenberg/SCSKiller">GitHub</a></li>
+        <li><a href="https://discord.gg/st7C4yCTcN">Discord</a></li>
+        <li><a href="https://www.patreon.com/SCSKiller">Patreon</a></li>
+        <li><a href="https://x.com/SCSKiller">X</a></li>
+        <li><a href="/support/">Support</a></li>
+        <li><a href="/privacy/">Privacy</a></li>
+        <li><a href="/legal/">Legal notice</a></li>
+        <li><a href="/code-signing-policy/">Code signing policy</a></li>
+      </ul>
+    </nav>
+  </div>
+</footer>
+<dialog class="notice" id="dl-notice" aria-labelledby="dl-notice-title">
+  <div class="notice-body">
+    <header class="notice-head">
+      <span class="dl-icon sm" aria-hidden="true"><svg viewBox="0 0 32 32"><path d="M18 4 7 18h8l-2 10 12-15h-8l2-9z"/></svg></span>
+      <div>
+        <h2 id="dl-notice-title">Windows may warn you the first time</h2>
+        <p>SCSKiller isn't code-signed yet. It's open source, and signing is in progress.</p>
+      </div>
+    </header>
+
+    <h3>If you see "Windows protected your PC"</h3>
+    <ol class="ss-steps">
+      <li>
+        <div class="ss" aria-hidden="true">
+          <svg class="ss-x" viewBox="0 0 10 10"><path d="M1 1l8 8M9 1 1 9"/></svg>
+          <b>Windows protected your PC</b>
+          <p>Microsoft Defender SmartScreen prevented an unrecognized app from starting. Running this app might put your PC at risk.</p>
+          <u class="hit">More info</u>
+          <span class="ss-btns"><em>Don't run</em></span>
+          <svg class="cursor c1" viewBox="0 0 12 18"><path d="M1 1v14l3.6-3.4 2.6 5.6 2.2-1-2.6-5.5H12z"/></svg>
+        </div>
+        <p class="ss-cap"><span class="n">1</span>Click <strong>More info</strong>.</p>
+      </li>
+      <li>
+        <div class="ss" aria-hidden="true">
+          <svg class="ss-x" viewBox="0 0 10 10"><path d="M1 1l8 8M9 1 1 9"/></svg>
+          <b>Windows protected your PC</b>
+          <p>Microsoft Defender SmartScreen prevented an unrecognized app from starting. Running this app might put your PC at risk.</p>
+          <dl class="ss-app"><dt>App:</dt><dd>SCSKiller.exe</dd><dt>Publisher:</dt><dd>Unknown publisher</dd></dl>
+          <span class="ss-btns"><em class="hit">Run anyway</em><em>Don't run</em></span>
+          <svg class="cursor c2" viewBox="0 0 12 18"><path d="M1 1v14l3.6-3.4 2.6 5.6 2.2-1-2.6-5.5H12z"/></svg>
+        </div>
+        <p class="ss-cap"><span class="n">2</span>Then <strong>Run anyway</strong>.</p>
+      </li>
+    </ol>
+
+    <div class="verify">
+      <svg class="shield" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.5 4 5.5v6c0 5 3.4 8.6 8 10 4.6-1.4 8-5 8-10v-6z"/><path d="m8.5 12 2.4 2.4 4.6-4.8"/></svg>
+      <div>
+        <h3>Check the file</h3>
+        <p>Compare its SHA-256 with the one on the <a href="https://github.com/BlueHeisenberg/SCSKiller/releases/latest" data-release-page>GitHub release page</a>, or read <a href="https://github.com/BlueHeisenberg/SCSKiller">the source</a>. In PowerShell:</p>
+        <div class="cmd"><code>Get-FileHash .\SCSKiller*.exe</code><button type="button" class="copy" data-copy="Get-FileHash .\SCSKiller*.exe">Copy</button></div>
+      </div>
+    </div>
+
+    <div class="notice-actions">
+      <a class="btn btn-primary" data-dl-go>Download SCSKiller</a>
+      <button class="btn" type="button" data-dl-cancel>Cancel</button>
+      <a class="policy" href="/code-signing-policy/">Code signing policy</a>
+    </div>
+  </div>
+</dialog>
+</body>
+</html>

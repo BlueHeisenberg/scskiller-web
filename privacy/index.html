@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Privacy policy · SCSKiller</title>
+<meta name="description" content="What SCSKiller and its servers collect, why, for how long, and your rights.">
+<meta name="theme-color" content="#05070a">
+<meta name="color-scheme" content="dark">
+<link rel="canonical" href="https://scskiller.com/privacy/">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/site.css">
+<script>document.documentElement.classList.add('js')</script>
+<script src="/assets/bg.js" defer></script>
+<script src="/assets/site.js" defer></script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="/"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M18 4 7 18h8l-2 10 12-15h-8l2-9z" fill="none" stroke="#4cc2ff" stroke-width="2.2" stroke-linejoin="round"/></svg>SCSKiller</a>
+    <nav class="nav" aria-label="Main">
+      <a href="/#why">Why it stutters</a>
+      <a href="/#how">How it works</a>
+      <a href="/#results">Results</a>
+      <a href="/#faq">FAQ</a>
+      <a class="keep" href="/support/">Support</a>
+      <a class="btn btn-primary" href="/#download">Download</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main" class="doc">
+  <div class="band" aria-hidden="true"><canvas class="scene" data-variant="band"></canvas></div>
+  <div class="wrap">
+    <article class="panel">
+      <h1>Privacy policy</h1>
+      <p class="updated">Last updated: 28 September 2026</p>
+
+      <h2 id="short">In short</h2>
+      <ul>
+        <li>SCSKiller runs on your PC. Everything it does there works offline and without an account.</li>
+        <li>Your data leaves your PC only when you sign in with Patreon, share recordings (opt-in), download from the community database, or update.</li>
+        <li>We never receive your name or email address. Shared recordings are anonymous and never linked to your account.</li>
+        <li>This website has no cookies, analytics or trackers.</li>
+      </ul>
+
+      <h2 id="controller">Who is responsible</h2>
+      <p>SCSKiller is the data controller. Contact: <a href="mailto:contact@scskiller.com">contact@scskiller.com</a>. See the <a href="/legal/">legal notice</a>.</p>
+
+      <h2 id="app">When the app goes online</h2>
+      <table>
+        <tr><th scope="row">Welcome message</th><td>On first start, the app downloads its welcome text from our server. The request carries no account or device id.</td></tr>
+        <tr><th scope="row">Stable updates</th><td>Come from GitHub Releases. GitHub's privacy statement applies.</td></tr>
+        <tr><th scope="row">Beta and alpha builds</th><td>Come from our server, for signed-in supporters.</td></tr>
+        <tr><th scope="row">Game format data</th><td>For some games, the app downloads public files from GitHub that it needs to read the game's archives. No data about you is sent.</td></tr>
+        <tr><th scope="row">Sign-in, database, uploads</th><td>Described below.</td></tr>
+      </table>
+
+      <h2 id="signin">Sign-in with Patreon</h2>
+      <p>Patreon tells us your Patreon user id and your membership of the SCSKiller campaign. We don't request your name, email address or other memberships.</p>
+      <p>We store:</p>
+      <ul>
+        <li>your Patreon user id and member id;</li>
+        <li>your tier, membership status, paid-through date, last charge status and when we last checked them;</li>
+        <li>a random account reference, the only account id used outside our database;</li>
+        <li>your signed-in devices: a random id, a label, when each was added and last used. Device tokens are stored hashed.</li>
+      </ul>
+      <p>We don't store your name, email address, picture, postal address, payment amounts or Patreon login tokens. Your IP address is not stored with your account.</p>
+
+      <h2 id="uploads">Sharing recordings (opt-in)</h2>
+      <p>Sharing is off by default. Before the first upload, the app shows you exactly what would be sent.</p>
+      <p>An upload contains shader hashes and how the game combines them into pipelines (root signatures, formats and other pipeline state). It contains no shader code. It also reveals:</p>
+      <ul>
+        <li>that this device has the game and which build (store id, build id, content hash);</li>
+        <li>your GPU vendor;</li>
+        <li>roughly which parts of the game you played;</li>
+        <li>the names of middleware DLLs next to the game, which can reveal mods such as upscaler mods.</li>
+      </ul>
+      <p>Not sent: your driver version, file paths, the game's exe name or your Windows user name.</p>
+      <p>Uploads use a random id for this install, which you can reset. They are never linked to your Patreon account, even when you are signed in.</p>
+
+      <h2 id="logs">Server logs</h2>
+      <ul>
+        <li>Connection logs keep a truncated IP address (the last part removed) for 7 days, for security and rate limiting.</li>
+        <li>A security log records sign-ins, device changes and membership changes, by account reference, for 90 days.</li>
+      </ul>
+
+      <h2 id="bases">Legal bases</h2>
+      <table>
+        <tr><th scope="row">Account, membership, devices</th><td>Performing our contract with you (GDPR Art. 6(1)(b)).</td></tr>
+        <tr><th scope="row">Truncated IP logs, security log</th><td>Our legitimate interest in keeping the service secure (Art. 6(1)(f)).</td></tr>
+        <tr><th scope="row">Uploads</th><td>Your opt-in, and our legitimate interest in running the community database (Art. 6(1)(f)).</td></tr>
+      </table>
+      <p>No special categories of data. No profiling.</p>
+
+      <h2 id="recipients">Who else processes data</h2>
+      <table>
+        <tr><th scope="row">Cloudflare</th><td>Processor. Carries traffic to our server, so it processes IP addresses and requests. Based in the US: transfers rely on the EU–US Data Privacy Framework.</td></tr>
+        <tr><th scope="row">Hosting provider</th><td>Processor. Hosts our server in the EU (Spain).</td></tr>
+        <tr><th scope="row">Backblaze B2</th><td>Processor. Stores encrypted backups only.</td></tr>
+        <tr><th scope="row">Patreon</th><td>Independent controller for your Patreon account and payments. Patreon's privacy policy applies.</td></tr>
+        <tr><th scope="row">GitHub</th><td>Independent controller. Hosts this website and the stable downloads, and sees visitors' IP addresses.</td></tr>
+      </table>
+
+      <h2 id="retention">Retention</h2>
+      <ul>
+        <li>Account data: while you have a membership. Former supporters' data is deleted 12 months after their last membership ends.</li>
+        <li>Connection logs: 7 days. Security log: 90 days.</li>
+        <li>Backups: rotate out within 30 days.</li>
+        <li>Shared recordings: kept as part of the database. They are anonymous.</li>
+      </ul>
+
+      <h2 id="rights">Your rights</h2>
+      <p>You can access, delete, correct or port your data, object to processing based on legitimate interest, and withdraw consent at any time. In the app, your account settings let you download your data or delete your account. Deleting it removes your Patreon link, membership and devices. Or write to <a href="mailto:contact@scskiller.com">contact@scskiller.com</a>.</p>
+      <p>You can also complain to the Spanish data protection authority, the <a href="https://www.aepd.es/" rel="noopener">AEPD</a>.</p>
+
+      <h2 id="website">This website</h2>
+      <p>No cookies, analytics, trackers or third-party requests. It is hosted on GitHub Pages; GitHub processes your IP address to serve it.</p>
+
+      <h2 id="changes">Changes</h2>
+      <p>We'll update the date above and describe material changes here.</p>
+    </article>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div>
+      <a class="brand" href="/"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M18 4 7 18h8l-2 10 12-15h-8l2-9z" fill="none" stroke="#4cc2ff" stroke-width="2.2" stroke-linejoin="round"/></svg>SCSKiller</a>
+      <p class="note">Free and open source (GPL-3.0-or-later). Not affiliated with any GPU maker, engine maker or game publisher. <a href="/legal/#trademarks">Trademarks</a>.</p>
+    </div>
+    <nav aria-label="Footer">
+      <ul>
+        <li><a href="https://github.com/BlueHeisenberg/SCSKiller">GitHub</a></li>
+        <li><a href="https://discord.gg/st7C4yCTcN">Discord</a></li>
+        <li><a href="https://www.patreon.com/SCSKiller">Patreon</a></li>
+        <li><a href="https://x.com/SCSKiller">X</a></li>
+        <li><a href="/support/">Support</a></li>
+        <li><a href="/privacy/" aria-current="page">Privacy</a></li>
+        <li><a href="/legal/">Legal notice</a></li>
+        <li><a href="/code-signing-policy/">Code signing policy</a></li>
+      </ul>
+    </nav>
+  </div>
+</footer>
+</body>
+</html>

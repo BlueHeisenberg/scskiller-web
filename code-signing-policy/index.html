@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Code signing policy · SCSKiller</title>
+<meta name="description" content="How SCSKiller release binaries are built and signed.">
+<meta name="theme-color" content="#05070a">
+<meta name="color-scheme" content="dark">
+<link rel="canonical" href="https://scskiller.com/code-signing-policy/">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/site.css">
+<script>document.documentElement.classList.add('js')</script>
+<script src="/assets/bg.js" defer></script>
+<script src="/assets/site.js" defer></script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="/"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M18 4 7 18h8l-2 10 12-15h-8l2-9z" fill="none" stroke="#4cc2ff" stroke-width="2.2" stroke-linejoin="round"/></svg>SCSKiller</a>
+    <nav class="nav" aria-label="Main">
+      <a href="/#why">Why it stutters</a>
+      <a href="/#how">How it works</a>
+      <a href="/#results">Results</a>
+      <a href="/#faq">FAQ</a>
+      <a class="keep" href="/support/">Support</a>
+      <a class="btn btn-primary" href="/#download">Download</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main" class="doc">
+  <div class="band" aria-hidden="true"><canvas class="scene" data-variant="band"></canvas></div>
+  <div class="wrap">
+    <article class="panel">
+      <h1>Code signing policy</h1>
+      <p class="updated">Last updated: 28 September 2026</p>
+
+      <h2 id="status">Status</h2>
+      <!-- APPLIED: once the application is sent, say "has applied ... It hasn't been granted yet."
+      SIGNED: when the certificate is issued, replace the next paragraph with:
+      <p>Free code signing provided by <a href="https://about.signpath.io/">SignPath.io</a>, certificate by <a href="https://signpath.org/">SignPath Foundation</a>.</p> -->
+      <p>SCSKiller will apply to the SignPath Foundation for free code signing. Until it is granted, releases are unsigned, and Windows may warn you when you run the installer.</p>
+
+      <h2 id="scope">What is signed</h2>
+      <ul>
+        <li>Stable releases only: the binaries built by the public repository's GitHub Actions workflow, from the tagged public source.</li>
+        <li>Beta and alpha builds are not signed under this policy.</li>
+      </ul>
+
+      <h2 id="roles">Roles</h2>
+      <table>
+        <tr><th scope="row">Committers and reviewers</th><td><a href="https://github.com/BlueHeisenberg">BlueHeisenberg</a></td></tr>
+        <tr><th scope="row">Approvers</th><td><a href="https://github.com/BlueHeisenberg">BlueHeisenberg</a></td></tr>
+      </table>
+      <p>Every signing request is approved by hand.</p>
+
+      <h2 id="privacy">Privacy</h2>
+      <p>SCSKiller connects to the network only to:</p>
+      <ul>
+        <li>show its welcome text on first start;</li>
+        <li>check for and download updates;</li>
+        <li>download public files some games need to be read;</li>
+        <li>sign in with Patreon, and use the community database, if you choose to;</li>
+        <li>share recordings, if you opt in.</li>
+      </ul>
+      <p>Details are in the <a href="/privacy/">privacy policy</a>.</p>
+    </article>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div>
+      <a class="brand" href="/"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M18 4 7 18h8l-2 10 12-15h-8l2-9z" fill="none" stroke="#4cc2ff" stroke-width="2.2" stroke-linejoin="round"/></svg>SCSKiller</a>
+      <p class="note">Free and open source (GPL-3.0-or-later). Not affiliated with any GPU maker, engine maker or game publisher. <a href="/legal/#trademarks">Trademarks</a>.</p>
+    </div>
+    <nav aria-label="Footer">
+      <ul>
+        <li><a href="https://github.com/BlueHeisenberg/SCSKiller">GitHub</a></li>
+        <li><a href="https://discord.gg/st7C4yCTcN">Discord</a></li>
+        <li><a href="https://www.patreon.com/SCSKiller">Patreon</a></li>
+        <li><a href="https://x.com/SCSKiller">X</a></li>
+        <li><a href="/support/">Support</a></li>
+        <li><a href="/privacy/">Privacy</a></li>
+        <li><a href="/legal/">Legal notice</a></li>
+        <li><a href="/code-signing-policy/" aria-current="page">Code signing policy</a></li>
+      </ul>
+    </nav>
+  </div>
+</footer>
+</body>
+</html>
