@@ -42,6 +42,7 @@
       <ul>
         <li>SCSKiller runs on your PC. Everything it does there works offline and without an account.</li>
         <li>Your data leaves your PC only when you sign in with Patreon, share recordings (opt-in), download from the community database, or update.</li>
+        <li>Once a day the app tells our server that an install is active, with no identifier. You can turn that off in Settings.</li>
         <li>We never receive your name or email address. Shared recordings are anonymous and never linked to your account.</li>
         <li>This website has no cookies, analytics or trackers.</li>
       </ul>
@@ -52,6 +53,8 @@
       <h2 id="app">When the app goes online</h2>
       <table>
         <tr><th scope="row">Welcome message</th><td>On first start, the app downloads its welcome text from our server. The request carries no account or device id.</td></tr>
+        <tr><th scope="row">Known-stutter list</th><td>About once a day, the app downloads the list of games known to stutter from our server. The request carries no account or device id.</td></tr>
+        <tr><th scope="row">Daily active check</th><td>Once a day, the app tells our server that an install is active. The message contains the app's version, your GPU vendor (NVIDIA, AMD or other) and three yes/no flags: whether this is the install's first check ever, its first this week, and its first this month. The app works those flags out on your PC from the date of its last check. The message contains no identifier: no install id, no account, nothing about your PC or your games. The server adds it to a counter for that day, version and GPU vendor and keeps only those totals. Your IP address is used in memory to limit how many checks one address can send, and is never stored. On by default; turn it off in Settings ("Send an anonymous daily check") and nothing is sent.</td></tr>
         <tr><th scope="row">Stable updates</th><td>Come from GitHub Releases. GitHub's privacy statement applies.</td></tr>
         <tr><th scope="row">Beta and alpha builds</th><td>Come from our server, for signed-in supporters.</td></tr>
         <tr><th scope="row">Game format data</th><td>For some games, the app downloads public files from GitHub that it needs to read the game's archives. No data about you is sent.</td></tr>
