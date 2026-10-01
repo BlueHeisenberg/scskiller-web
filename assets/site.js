@@ -53,7 +53,7 @@
 
   // Download. One flag: RELEASED = true makes every [data-dl] button open the notice about the unsigned build, which
   // then downloads from DOWNLOAD_URL; false puts the "Coming soon" labels back.
-  const RELEASED = false;
+  const RELEASED = true;
   const DOWNLOAD_URL = 'https://github.com/BlueHeisenberg/SCSKiller/releases/latest';
   const released = RELEASED;
   document.documentElement.classList.toggle('soon', !released);

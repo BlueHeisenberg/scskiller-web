@@ -36,12 +36,14 @@
   <div class="wrap">
     <article class="panel">
       <h1>Privacy policy</h1>
-      <p class="updated">Last updated: 28 September 2026</p>
+      <p class="updated">Last updated: 1 October 2026</p>
 
       <h2 id="short">In short</h2>
       <ul>
         <li>SCSKiller runs on your PC. Everything it does there works offline and without an account.</li>
         <li>Your data leaves your PC only when you sign in with Patreon, share recordings (opt-in), download from the community database, or update.</li>
+        <li>Every install downloads a few public lists from our server, with no identifier. What they contain is matched against your games on your PC.</li>
+        <li>The optional recorder writes its files next to the game. Frame times stay on your PC and are never uploaded.</li>
         <li>Once a day the app tells our server that an install is active, with no identifier. You can turn that off in Settings.</li>
         <li>We never receive your name or email address. Shared recordings are anonymous and never linked to your account.</li>
         <li>This website has no cookies, analytics or trackers.</li>
@@ -52,8 +54,13 @@
 
       <h2 id="app">When the app goes online</h2>
       <table>
-        <tr><th scope="row">Welcome message</th><td>On first start, the app downloads its welcome text from our server. The request carries no account or device id.</td></tr>
-        <tr><th scope="row">Known-stutter list</th><td>About once a day, the app downloads the list of games known to stutter from our server. The request carries no account or device id.</td></tr>
+        <tr><th scope="row">Public lists</th><td>Every install downloads these from our server, signed in or not. The requests carry no account or device id.
+          <ul>
+            <li>The community database's list of the game builds it covers. The app matches it against your games on your PC; which games you have is never sent.</li>
+            <li>The welcome text, on first start.</li>
+            <li>The list of games known to stutter, about once a day.</li>
+            <li>The list of engine versions SCSKiller has tested, about once a day.</li>
+          </ul></td></tr>
         <tr><th scope="row">Daily active check</th><td>Once a day, the app tells our server that an install is active. The message contains the app's version, your GPU vendor (NVIDIA, AMD or other) and three yes/no flags: whether this is the install's first check ever, its first this week, and its first this month. The app works those flags out on your PC from the date of its last check. The message contains no identifier: no install id, no account, nothing about your PC or your games. The server adds it to a counter for that day, version and GPU vendor and keeps only those totals. Your IP address is used in memory to limit how many checks one address can send, and is never stored. On by default; turn it off in Settings ("Send an anonymous daily check") and nothing is sent.</td></tr>
         <tr><th scope="row">Stable updates</th><td>Come from GitHub Releases. GitHub's privacy statement applies.</td></tr>
         <tr><th scope="row">Beta and alpha builds</th><td>Come from our server, for signed-in supporters.</td></tr>
@@ -81,9 +88,11 @@
         <li>roughly which parts of the game you played;</li>
         <li>the names of middleware DLLs next to the game, which can reveal mods such as upscaler mods.</li>
       </ul>
-      <p>Not sent: your driver version, file paths, the game's exe name or your Windows user name.</p>
+      <p>Not sent: your driver version, file paths, the game's exe name, your Windows user name or your frame times.</p>
       <p>Uploads use a random id for this install, which you can reset. They are never linked to your Patreon account, even when you are signed in.</p>
 
+      <h2 id="recorder">The recorder</h2>
+      <p>The recorder is never used in games with anti-cheat, and you can turn it off in Settings, for all games or one. In a game where it is on, it writes its files next to the game: <code>d3d12.dll</code>, its settings file, the recording, a log and the game's frame times. The app reads them on your PC. Frame times are never uploaded. Turning the recorder off removes the <code>d3d12.dll</code> and the settings file; uninstalling SCSKiller removes its files from every game folder.</p>
       <h2 id="logs">Server logs</h2>
       <ul>
         <li>Connection logs keep a truncated IP address (the last part removed) for 7 days, for security and rate limiting.</li>
