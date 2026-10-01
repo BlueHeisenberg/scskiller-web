@@ -311,7 +311,7 @@
       <div class="qa" data-reveal>
         <details open><summary>Anti-cheat games?</summary><p>SCSKiller never launches them, injects into them, or gives them the recorder. It only reads their files.</p></details>
         <details><summary>Does it run while I play?</summary><p>It doesn't need to. The game reads the driver's cache on its own.</p></details>
-        <details><summary>Will Windows warn me?</summary><p>Probably, the first time. The first release isn't code-signed yet; signing is in progress. <a href="#dl-notice" data-notice>Show me</a></p></details>
+        <details><summary>Will Windows warn me?</summary><p>Probably, the first time. The first release isn't code-signed yet; signing is in progress. Click More info, then Run anyway.</p></details>
         <details><summary>Does it touch game files or drivers?</summary><p>It doesn't patch either. Only the optional recorder touches a game folder: it installs a small <code>d3d12.dll</code> and its settings file, and writes its recording, a log and the frame times next to the game. Turning it off removes what it installed; uninstalling SCSKiller removes the rest.</p></details>
         <details><summary>What about driver updates?</summary><p>An update clears the shader cache. SCSKiller notices and compiles again, on its own if you let it.</p></details>
         <details><summary>What about Intel GPUs?</summary><p>Not supported yet: I don't have one to test on. If you'd like to sponsor an Intel Arc GPU, get in touch at <a href="mailto:contact@scskiller.com">contact@scskiller.com</a>.</p></details>
@@ -327,15 +327,14 @@
         <span class="dl-icon" aria-hidden="true"><svg viewBox="0 0 32 32"><path d="M18 4 7 18h8l-2 10 12-15h-8l2-9z"/></svg></span>
         <h2><span data-soon>Coming soon.</span><span data-live>Get SCSKiller.</span></h2>
         <p class="lead">The whole app is free. Open source, GPL-3.0-or-later. You don't need an account to use it.</p>
-        <!-- Download: RELEASED and DOWNLOAD_URL in assets/site.js. Every Download button opens the
-        "Windows may warn you" notice (#dl-notice), which then downloads. -->
+        <!-- Download: RELEASED and DOWNLOAD_URL in assets/site.js. -->
         <a class="btn btn-primary btn-shine btn-xl" role="link" aria-disabled="true" data-dl>
           <svg class="win" viewBox="0 0 16 16" aria-hidden="true"><path d="M0 0h7.5v7.5H0zM8.5 0H16v7.5H8.5zM0 8.5h7.5V16H0zM8.5 8.5H16V16H8.5z"/></svg>
           <span data-soon>Coming soon</span><span data-live>Download for Windows</span>
         </a>
         <p class="dl-meta"><span data-soon>First release on GitHub. </span>Windows, 64-bit.</p>
         <ul class="dl-links">
-          <li data-live>Not code-signed yet, so Windows may warn you once. <a href="#dl-notice" data-notice>Show me</a></li>
+          <li data-live>Not code-signed yet: if Windows warns you, click More info, then Run anyway.</li>
           <li><a href="/code-signing-policy/">Code signing policy</a></li>
           <li><a href="/support/">How supporting works <span aria-hidden="true">→</span></a></li>
         </ul>
@@ -369,57 +368,5 @@
     </nav>
   </div>
 </footer>
-<dialog class="notice" id="dl-notice" aria-labelledby="dl-notice-title">
-  <div class="notice-body">
-    <header class="notice-head">
-      <span class="dl-icon sm" aria-hidden="true"><svg viewBox="0 0 32 32"><path d="M18 4 7 18h8l-2 10 12-15h-8l2-9z"/></svg></span>
-      <div>
-        <h2 id="dl-notice-title">Windows may warn you the first time</h2>
-        <p>SCSKiller isn't code-signed yet. It's open source, and signing is in progress.</p>
-      </div>
-    </header>
-
-    <h3>If you see "Windows protected your PC"</h3>
-    <ol class="ss-steps">
-      <li>
-        <div class="ss" aria-hidden="true">
-          <svg class="ss-x" viewBox="0 0 10 10"><path d="M1 1l8 8M9 1 1 9"/></svg>
-          <b>Windows protected your PC</b>
-          <p>Microsoft Defender SmartScreen prevented an unrecognized app from starting. Running this app might put your PC at risk.</p>
-          <u class="hit">More info</u>
-          <span class="ss-btns"><em>Don't run</em></span>
-          <svg class="cursor c1" viewBox="0 0 12 18"><path d="M1 1v14l3.6-3.4 2.6 5.6 2.2-1-2.6-5.5H12z"/></svg>
-        </div>
-        <p class="ss-cap"><span class="n">1</span>Click <strong>More info</strong>.</p>
-      </li>
-      <li>
-        <div class="ss" aria-hidden="true">
-          <svg class="ss-x" viewBox="0 0 10 10"><path d="M1 1l8 8M9 1 1 9"/></svg>
-          <b>Windows protected your PC</b>
-          <p>Microsoft Defender SmartScreen prevented an unrecognized app from starting. Running this app might put your PC at risk.</p>
-          <dl class="ss-app"><dt>App:</dt><dd>SCSKiller.exe</dd><dt>Publisher:</dt><dd>Unknown publisher</dd></dl>
-          <span class="ss-btns"><em class="hit">Run anyway</em><em>Don't run</em></span>
-          <svg class="cursor c2" viewBox="0 0 12 18"><path d="M1 1v14l3.6-3.4 2.6 5.6 2.2-1-2.6-5.5H12z"/></svg>
-        </div>
-        <p class="ss-cap"><span class="n">2</span>Then <strong>Run anyway</strong>.</p>
-      </li>
-    </ol>
-
-    <div class="verify">
-      <svg class="shield" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.5 4 5.5v6c0 5 3.4 8.6 8 10 4.6-1.4 8-5 8-10v-6z"/><path d="m8.5 12 2.4 2.4 4.6-4.8"/></svg>
-      <div>
-        <h3>Check the file</h3>
-        <p>Compare its SHA-256 with the one on the <a href="https://github.com/BlueHeisenberg/SCSKiller/releases/latest" data-release-page>GitHub release page</a>, or read <a href="https://github.com/BlueHeisenberg/SCSKiller">the source</a>. In PowerShell:</p>
-        <div class="cmd"><code>Get-FileHash .\SCSKiller*.exe</code><button type="button" class="copy" data-copy="Get-FileHash .\SCSKiller*.exe">Copy</button></div>
-      </div>
-    </div>
-
-    <div class="notice-actions">
-      <a class="btn btn-primary" data-dl-go>Download SCSKiller</a>
-      <button class="btn" type="button" data-dl-cancel>Cancel</button>
-      <a class="policy" href="/code-signing-policy/">Code signing policy</a>
-    </div>
-  </div>
-</dialog>
 </body>
 </html>

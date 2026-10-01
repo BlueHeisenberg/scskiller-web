@@ -51,37 +51,11 @@
     jolt.addEventListener('animationend', () => jolt.classList.remove('hit'));
   }
 
-  // Download. One flag: RELEASED = true makes every [data-dl] button open the notice about the unsigned build, which
-  // then downloads from DOWNLOAD_URL; false puts the "Coming soon" labels back.
+  // Download: RELEASED = false puts the "Coming soon" labels back. The unversioned asset each release uploads.
   const RELEASED = true;
-  const DOWNLOAD_URL = 'https://github.com/BlueHeisenberg/SCSKiller/releases/latest';
-  const released = RELEASED;
-  document.documentElement.classList.toggle('soon', !released);
-  const notice = document.getElementById('dl-notice');
-  if (notice && notice.showModal) {
-    const go = notice.querySelector('[data-dl-go]'), cancel = notice.querySelector('[data-dl-cancel]');
-    notice.querySelectorAll('[data-release-page]').forEach((e) => { e.href = DOWNLOAD_URL; });
-    if (released) go.href = DOWNLOAD_URL;
-    else { go.setAttribute('aria-disabled', 'true'); go.textContent = 'Download coming soon'; }
-    go.addEventListener('click', () => { if (released) notice.close(); });   // the browser starts the download
-    cancel.addEventListener('click', () => notice.close());
-    notice.addEventListener('click', (e) => { if (e.target === notice) notice.close(); });   // click on the backdrop
-    notice.addEventListener('keydown', (e) => {   // keep Tab inside the dialog (Esc closes it natively)
-      if (e.key !== 'Tab') return;
-      const f = [...notice.querySelectorAll('a[href], button')], first = f[0], last = f[f.length - 1];
-      if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
-      else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
-    });
-    notice.querySelectorAll('[data-copy]').forEach((b) => b.addEventListener('click', () => {
-      if (navigator.clipboard) navigator.clipboard.writeText(b.dataset.copy).then(() => {
-        b.textContent = 'Copied'; setTimeout(() => { b.textContent = 'Copy'; }, 1500);
-      });
-    }));
-    const open = (e) => { e.preventDefault(); notice.showModal(); (released ? go : cancel).focus(); };
-    document.querySelectorAll('[data-notice]').forEach((a) => a.addEventListener('click', open));
-    if (released) document.querySelectorAll('[data-dl]').forEach((a) => {
-      a.removeAttribute('aria-disabled'); a.removeAttribute('role'); a.href = DOWNLOAD_URL;
-      a.addEventListener('click', open);
-    });
-  }
+  const DOWNLOAD_URL = 'https://github.com/BlueHeisenberg/SCSKiller/releases/latest/download/SCSKiller-Setup.exe';
+  document.documentElement.classList.toggle('soon', !RELEASED);
+  if (RELEASED) document.querySelectorAll('[data-dl]').forEach((a) => {
+    a.removeAttribute('aria-disabled'); a.removeAttribute('role'); a.href = DOWNLOAD_URL;
+  });
 })();
