@@ -39,13 +39,13 @@
   <div class="wrap">
     <article class="panel">
       <h1>Privacy policy</h1>
-      <p class="updated">Last updated: 1 October 2026</p>
+      <p class="updated">Last updated: 2 October 2026</p>
 
       <h2 id="short">In short</h2>
       <ul>
         <li>SCSKiller runs on your PC. Everything it does there works offline and without an account.</li>
-        <li>Your data leaves your PC only when you sign in with Patreon, share recordings (opt-in), download from the community database, or update.</li>
-        <li>Every install downloads a few public lists from our server, with no identifier. What they contain is matched against your games on your PC.</li>
+        <li>Your data leaves your PC only when you sign in with Patreon, share recordings or upscaler packs (opt-in), download from the community database, or update.</li>
+        <li>Every install downloads a few public lists from our server, and the shared upscaler packs for its games, with no identifier. What the lists contain is matched against your games on your PC.</li>
         <li>The optional recorder writes its files next to the game. Frame times stay on your PC and are never uploaded.</li>
         <li>Once a day the app tells our server that an install is active, with no identifier. You can turn that off in Settings.</li>
         <li>We never receive your name or email address. Shared recordings are anonymous and never linked to your account.</li>
@@ -59,12 +59,13 @@
       <table>
         <tr><th scope="row">Public lists</th><td>Every install downloads these from our server, signed in or not. The requests carry no account or device id.
           <ul>
-            <li>The community database's list of the game builds it covers. The app matches it against your games on your PC; which games you have is never sent.</li>
+            <li>The community database's list of the game builds and upscaler packs it covers. The app matches it against your games, and the upscaler DLLs next to them, on your PC; which games you have is never sent.</li>
             <li>The welcome text, on first start.</li>
             <li>The list of games known to stutter, about once a day.</li>
             <li>The list of engine versions SCSKiller has tested, about once a day.</li>
           </ul></td></tr>
         <tr><th scope="row">Daily active check</th><td>Once a day, the app tells our server that an install is active. The message contains the app's version, your GPU vendor (NVIDIA, AMD or other) and three yes/no flags: whether this is the install's first check ever, its first this week, and its first this month. The app works those flags out on your PC from the date of its last check. The message contains no identifier: no install id, no account, nothing about your PC or your games. The server adds it to a counter for that day, version and GPU vendor and keeps only those totals. Your IP address is used in memory to limit how many checks one address can send, and is never stored. On by default; turn it off in Settings ("Send an anonymous daily check") and nothing is sent.</td></tr>
+        <tr><th scope="row">Upscaler packs</th><td>Every install downloads, signed in or not, the shared packs for the FidelityFX and XeSS DLL versions next to its games and its GPU vendor. The request carries no account, token or device id and names only the pack, which tells our server that this address has that DLL version and GPU vendor; nothing about your games is sent. Packs are served through Cloudflare's cache, so many requests are answered by Cloudflare and never reach our server. Your IP address is used in memory to limit how much one address can download (200 requests and 50 MB a day), and is never stored. There is no setting for it.</td></tr>
         <tr><th scope="row">Stable updates</th><td>Come from GitHub Releases. GitHub's privacy statement applies.</td></tr>
         <tr><th scope="row">Beta and alpha builds</th><td>Come from our server, for signed-in supporters.</td></tr>
         <tr><th scope="row">Game format data</th><td>For some games, the app downloads public files from GitHub that it needs to read the game's archives. No data about you is sent.</td></tr>
@@ -82,7 +83,7 @@
       </ul>
       <p>We don't store your name, email address, picture, postal address, payment amounts or Patreon login tokens. Your IP address is not stored with your account.</p>
 
-      <h2 id="uploads">Sharing recordings (opt-in)</h2>
+      <h2 id="uploads">Sharing recordings and upscaler packs (opt-in)</h2>
       <p>Sharing is off by default. Before the first upload, the app shows you exactly what would be sent.</p>
       <p>An upload contains shader hashes and how the game combines them into pipelines (root signatures, formats and other pipeline state). It contains no shader code. It also reveals:</p>
       <ul>
@@ -92,6 +93,7 @@
         <li>the names of middleware DLLs next to the game, which can reveal mods such as upscaler mods.</li>
       </ul>
       <p>Not sent: your driver version, file paths, the game's exe name, your Windows user name or your frame times.</p>
+      <p>With sharing on, the app also uploads its upscaler packs: the FidelityFX and XeSS pipelines found in your recordings, one pack per DLL version and GPU vendor, each time a pack gains pipelines. A pack upload contains the pipelines' shader hashes, root signatures and pipeline state, the DLL's vendor (AMD or Intel), file name and SHA-1, your GPU vendor and the app's version. It contains no shader code and nothing about which game it came from.</p>
       <p>Uploads use a random id for this install, which you can reset. They are never linked to your Patreon account, even when you are signed in.</p>
 
       <h2 id="recorder">The recorder</h2>
@@ -112,7 +114,7 @@
 
       <h2 id="recipients">Who else processes data</h2>
       <table>
-        <tr><th scope="row">Cloudflare</th><td>Processor. Carries traffic to our server, so it processes IP addresses and requests. Based in the US: transfers rely on the EU–US Data Privacy Framework.</td></tr>
+        <tr><th scope="row">Cloudflare</th><td>Processor. Carries traffic to our server, so it processes IP addresses and requests, and caches the upscaler packs. Based in the US: transfers rely on the EU–US Data Privacy Framework.</td></tr>
         <tr><th scope="row">Hosting provider</th><td>Processor. Hosts our server in the EU (Spain).</td></tr>
         <tr><th scope="row">Backblaze B2</th><td>Processor. Stores encrypted backups only.</td></tr>
         <tr><th scope="row">Patreon</th><td>Independent controller for your Patreon account and payments. Patreon's privacy policy applies.</td></tr>
@@ -124,7 +126,7 @@
         <li>Account data: while you have a membership. Former supporters' data is deleted 12 months after their last membership ends.</li>
         <li>Connection logs: 7 days. Security log: 90 days.</li>
         <li>Backups: rotate out within 30 days.</li>
-        <li>Shared recordings: kept as part of the database. They are anonymous.</li>
+        <li>Shared recordings and upscaler packs: kept as part of the database. They are anonymous.</li>
       </ul>
 
       <h2 id="rights">Your rights</h2>
