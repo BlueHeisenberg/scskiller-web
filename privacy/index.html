@@ -44,7 +44,7 @@
       <h2 id="short">In short</h2>
       <ul>
         <li>SCSKiller runs on your PC. Everything it does there works offline and without an account.</li>
-        <li>Your data leaves your PC only when you sign in with Patreon, share recordings or upscaler packs (opt-in), send a compatibility report, download from the community database, or update.</li>
+        <li>Your data leaves your PC only when you sign in with Patreon, share recordings or upscaler packs (opt-in), send a compatibility report or a problem report, download from the community database, or update.</li>
         <li>Every install downloads a few public lists from our server, and the shared upscaler packs for its games, with no identifier. What the lists contain is matched against your games on your PC.</li>
         <li>The optional recorder writes its files next to the game. Frame times stay on your PC and are never uploaded.</li>
         <li>Once a day the app tells our server that an install is active, with no identifier. You can turn that off in Settings.</li>
@@ -69,7 +69,7 @@
         <tr><th scope="row">Stable updates</th><td>Come from GitHub Releases. GitHub's privacy statement applies.</td></tr>
         <tr><th scope="row">Beta and alpha builds</th><td>Come from our server, for signed-in supporters.</td></tr>
         <tr><th scope="row">Game format data</th><td>For some games, the app downloads public files from GitHub that it needs to read the game's archives. No data about you is sent.</td></tr>
-        <tr><th scope="row">Sign-in, database, uploads, compatibility reports</th><td>Described below.</td></tr>
+        <tr><th scope="row">Sign-in, database, uploads, compatibility and problem reports</th><td>Described below.</td></tr>
       </table>
 
       <h2 id="signin">Sign-in with Patreon</h2>
@@ -97,7 +97,7 @@
       <p>Uploads use a random id for this install, which you can reset. They are never linked to your Patreon account, even when you are signed in.</p>
 
       <h2 id="compatibility-reports">Compatibility reports</h2>
-      <p>On a game's page, "Send report" lets you tell other players how the game ran after SCSKiller compiled it. Nothing is sent until you click Send report, and the app never sends a report on its own.</p>
+      <p>On a game's page, "Rate this compile" ("Send report" in 1.3.0-beta.1) lets you tell other players how the game ran after SCSKiller compiled it. Nothing is sent until you click Send rating, and the app never sends a report on its own.</p>
       <p>A report contains:</p>
       <ul>
         <li>your answer, and whether you ticked "Frame generation was on", "An upscaler was on" and "Mods were installed"</li>
@@ -109,6 +109,10 @@
       <p>Nothing else is sent: no free text, no file paths, no Windows user name, no frame times.</p>
       <p>Reports are anonymous. They use the same random id for this install as shared recordings, created with your first report if there isn't one yet, so that a new report about the same game build replaces your earlier one. They are never linked to your Patreon account. The server keeps the date of a report, not the time, and doesn't store your IP address with it. The request is in the <a href="#logs">server logs</a> like any other.</p>
       <p>The public compatibility list shows results per game and GPU class (vendor and GPU family): the share of each answer and a rounded number of devices. A game or class appears only once enough different devices have reported it, and never shows a single device, its hardware or its id. Reports with "Mods were installed" ticked aren't counted.</p>
+      <h2 id="problem-reports">Problem reports</h2>
+      <p>On a game's page, "Report a problem" sends our team what went wrong. Nothing is sent until you press Send, and the dialog shows the whole report before you do.</p>
+      <p>A report contains what you typed, the app's version, the game's name and store, your GPU vendor and model, driver version and Windows version, the numbers on the game's page, and the app's latest log lines about that game unless you leave them out. Your Windows user name, your user folder's path, your computer's name and e-mail addresses are masked in it. It carries no account, device id or token, and works signed out.</p>
+      <p>Reports are kept on our server for 90 days, only read to fix the problem, and then deleted. The server doesn't store your IP address with a report.</p>
 
       <h2 id="recorder">The recorder</h2>
       <p>The recorder is never used in games with anti-cheat, and you can turn it off in Settings, for all games or one. In a game where it is on, it writes its files next to the game: <code>d3d12.dll</code>, its settings file, the recording, a log and the game's frame times. The app reads them on your PC. Frame times are never uploaded. Turning the recorder off removes the <code>d3d12.dll</code> and the settings file; uninstalling SCSKiller removes its files from every game folder.</p>
@@ -124,6 +128,7 @@
         <tr><th scope="row">Truncated IP logs, security log</th><td>Our legitimate interest in keeping the service secure (Art. 6(1)(f)).</td></tr>
         <tr><th scope="row">Uploads</th><td>Your opt-in, and our legitimate interest in running the community database (Art. 6(1)(f)).</td></tr>
         <tr><th scope="row">Compatibility reports</th><td>Your choice to send one, and our legitimate interest in publishing the compatibility list (Art. 6(1)(f)).</td></tr>
+        <tr><th scope="row">Problem reports</th><td>Your consent, given by pressing Send (Art. 6(1)(a)).</td></tr>
       </table>
       <p>No special categories of data. No profiling.</p>
 
@@ -139,7 +144,7 @@
       <h2 id="retention">Retention</h2>
       <ul>
         <li>Account data: while you have a membership. Former supporters' data is deleted 12 months after their last membership ends.</li>
-        <li>Connection logs: 7 days. Security log: 90 days.</li>
+        <li>Connection logs: 7 days. Security log: 90 days. Problem reports: 90 days.</li>
         <li>Backups: rotate out within 30 days.</li>
         <li>Shared recordings and upscaler packs: kept as part of the database. They are anonymous.</li>
       </ul>
