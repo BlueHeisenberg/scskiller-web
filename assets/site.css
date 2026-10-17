@@ -104,6 +104,8 @@ main { display: block; }
 .nav a:hover::after, .nav a[aria-current="page"]::after { transform: scaleX(1); }
 .nav .btn { margin-left: 6px; }
 .nav a.btn-primary, .nav a.btn-primary:hover { color: #00131d; }
+/* the full nav needs 1091px: narrower, the links the footer also has go first */
+@media (max-width: 1090px) { .nav a[href^="https:"]:not(.btn) { display: none; } }
 @media (max-width: 860px) { .nav a:not(.btn):not(.keep) { display: none; } }
 
 /* ---------- buttons ---------- */

@@ -1,0 +1,121 @@
+/* What the two lists add to the website's site.css and compat.css (assets/), in the site's tokens. */
+/* the local pages' wider margins, the website keeps its own */
+.dash { --gutter: clamp(20px, 5vw, 48px); }
+
+/* the head: title, subtitle and search on the left, the buttons centred on them at the right */
+.hero.sub { padding-bottom: 32px; }
+.hero.sub .band { height: 320px; }
+.head { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 1.75rem 3rem; align-items: center; }
+.head.solo { grid-template-columns: minmax(0, 1fr); }
+.hero.sub h1 { font-size: clamp(2rem, 3.4vw, 2.7rem); max-width: none; }
+.hero.sub .lede { margin: 20px 0 36px; font-size: 1.05rem; }
+.head h1 + .controls { margin-top: 40px; }
+/* sized by the longest label, so a larger text size widens the buttons instead of clipping them */
+.side { display: grid; grid-template-columns: max-content; gap: 0.75rem; }
+.hero.sub .side .btn { width: 100%; min-width: 18rem; height: 2.75em; padding: 0 2.5em; font-size: 1rem; justify-content: center; white-space: nowrap; }
+/* solid, so the band's glow doesn't wash out the outlined buttons */
+.side .btn:not(.btn-primary) { background: var(--panel-solid); }
+.side .btn:not(.btn-primary):hover { background: #111823; }
+.hero.sub + .compat-body { padding-top: 0; }
+.head .floor { margin: 22px 0 0; }
+.head .status { margin: 12px 0 0; }
+.nav a { white-space: nowrap; }
+/* the local pages' nav: rem queries on the header's own width, so the links fold away when larger text no longer fits them.
+   The website's pages keep the site's own nav rules. */
+.site-header .wrap { container-type: inline-size; }
+/* the full nav's width: its px icon and gaps plus its rem text, measured at 16, 20 and 24px */
+@container (width < calc(296px + 41.2rem)) { .dash .nav a:not(.btn):not(.keep) { display: none; } }
+@container (max-width: 40rem) { .dash .nav a.keep[aria-current] { display: none; } }
+@container (max-width: 28rem) { .dash .nav .btn { display: none; } }
+
+/* sections and one card per game, its rank in front */
+.group + .group { margin-top: 64px; }
+.group[hidden], .game[hidden] { display: none; }
+.group-head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 18px; margin-bottom: 24px; }
+.group-head h2 { font-size: 1.5rem; }
+.group-head a { font-size: 0.9rem; }
+.group-head .note { font-size: 0.95rem; color: var(--muted); }
+.ranked { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+.ranked-head, .game-row { display: grid; grid-template-columns: 5rem minmax(0, 1fr) var(--cells); align-items: center; gap: 0 24px; }
+.req { --cells: 7rem 13rem; }
+/* the name as wide as it is, its tags right after it */
+.sup.ranked-head, .sup .game-row { grid-template-columns: 5rem auto minmax(min-content, 1fr) 8.5rem; }
+.cells { display: contents; }
+.ranked-head { padding: 0 28px 12px 0; font: 600 0.72rem/1.3 var(--mono); letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
+.ranked-head .num, .cell.num { text-align: right; }
+.game { background: linear-gradient(180deg, #0b1119, #080c12); }
+.game-row { min-height: 76px; padding: 14px 28px 14px 0; }
+.rank { text-align: right; font: 700 1.7rem/1 var(--mono); font-variant-numeric: tabular-nums; color: var(--cyan);
+  text-shadow: 0 0 16px rgba(76, 194, 255, 0.4); }
+.ranked-head .rank { font: inherit; color: inherit; text-shadow: none; }
+.gname { font-size: 1.08rem; font-weight: 650; overflow-wrap: anywhere; }
+.cell.num { font: 600 1.15rem/1 var(--mono); font-variant-numeric: tabular-nums; color: var(--text); }
+.cell.since { font-family: var(--mono); color: var(--soft); white-space: nowrap; }
+.cell.tags { display: flex; flex-wrap: wrap; gap: 6px; margin-left: -14px; }
+.unit { display: none; }
+
+/* small labels beside a name */
+.tag { display: inline-block; font: 700 0.64rem/1 var(--mono); letter-spacing: 0.08em;
+  text-transform: uppercase; padding: 4px 7px; border-radius: 5px; white-space: nowrap; }
+.tag.ac { color: #ffd43b; box-shadow: inset 0 0 0 1px rgba(255, 212, 59, 0.5); }
+.tag.src-team { color: var(--cyan-hi); box-shadow: inset 0 0 0 1px var(--cyan); }
+.tag.src-community { color: var(--soft); box-shadow: inset 0 0 0 1px rgba(195, 205, 216, 0.4); }
+.tag.none { color: var(--muted); box-shadow: inset 0 0 0 1px var(--line-strong); }
+/* the supported page's legend: one panel in the buttons' style, a row per tag, chips in one column */
+.side.legend-box { list-style: none; margin: 0; padding: 0.25rem 1.25rem; width: 28rem; grid-template-columns: max-content minmax(0, 1fr); column-gap: 1rem; row-gap: 0;
+  border: 1px solid var(--line-strong); border-radius: 10px; background: var(--panel-solid); font-size: 0.88rem; line-height: 1.45; color: var(--soft); }
+.legend-box li { grid-column: 1 / -1; display: grid; grid-template-columns: subgrid; align-items: baseline; padding: 0.75rem 0; }
+.legend-box li + li { border-top: 1px solid var(--line); }
+.legend-box .tag { justify-self: start; }
+
+.eng { --cells: minmax(0, 2.2fr) 8.5rem; }
+.cell.covers { font-size: 0.95rem; color: var(--soft); }
+/* engines: no rank column */
+.engines.ranked-head, .engines .game-row { grid-template-columns: minmax(0, 1fr) var(--cells); padding-left: 28px; }
+.engines .rank, .engines.ranked-head > :first-child { display: none; }
+
+/* rem and em breakpoints follow the browser's text size */
+.hero.sub .wrap { container-type: inline-size; }
+@container (max-width: 50rem) {
+  /* one column: title, subtitle, the buttons or legend, then search, update time and count */
+  .head { grid-template-columns: minmax(0, 1fr); gap: 0; }
+  .head-text { display: contents; }
+  .head h1 { order: 1; } .head .lede { order: 2; } .head .side { order: 3; margin-bottom: 28px; }
+  .head .controls { order: 4; } .head .floor { order: 5; } .head .status { order: 6; }
+  .side { grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr)); }
+  .hero.sub .side .btn { min-width: 0; }
+  .side.legend-box { width: auto; }
+  .head:not(:has(.lede)) .side { margin-top: 32px; }
+  .head h1 + .controls { margin-top: 0; }
+}
+@media (max-width: 40em) {
+  .hero.sub { padding: 104px 0 28px; }
+  .ranked-head { display: none; }
+  .group + .group { margin-top: 48px; }
+  .group-head { margin-bottom: 18px; }
+  .ranked { gap: 8px; }
+  /* compact cards: rank, the name on one line (two at most), the values small and inline under it */
+  .ranked .game-row { grid-template-columns: 2.5rem minmax(0, 1fr); gap: 4px 12px; padding: 12px 14px 12px 0; min-height: 0; }
+  .game-row .rank { grid-row: 1 / 3; font-size: 1.25rem; }
+  .gname { font-size: 1rem; line-height: 1.3; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; overflow: hidden; }
+  .cells { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 10px; grid-column: 2; font-size: 0.85rem; line-height: 1.2; }
+  .unit { display: inline; }
+  .cell.num { font: 600 0.85rem/1.3 var(--sans); color: var(--soft); text-align: left; }
+  .cell.since { font-size: 0.8rem; }
+  .cell.tags { margin-left: 0; gap: 4px; }
+  .cell.tags:empty { display: none; }
+  /* a chip's height, so cards with and without tags match */
+  .sup .cells { min-height: calc(0.64rem + 8px); }
+  .cells .verdict { padding: 2px 8px; font-size: 0.78rem; }
+  .engines .game-row { grid-template-columns: minmax(0, 1fr); padding-left: 14px; }
+  .engines .cells { grid-column: 1; }
+  /* what an engine covers runs on, its version right after it */
+  .eng .cells { display: block; line-height: 1.4; }
+  .eng .cell { display: inline; }
+  .cell.covers { font-size: inherit; margin-right: 10px; }
+  .side { grid-template-columns: minmax(0, 1fr); }
+  /* the chip leads its line, the meaning flows after it */
+  .side.legend-box { display: block; }
+  .legend-box li { display: block; }
+  .legend-box .tag { margin-right: 0.5rem; }
+}
