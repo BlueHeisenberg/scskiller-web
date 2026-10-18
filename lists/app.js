@@ -36,7 +36,7 @@ const PILL = { waiting: ['v-none', 'What SCSKiller needs first'], working: ['v-h
 const SECTIONS = { patreon: ['Patreon priority', '<a href="https://discord.com/channels/1554579978262417579/1558523634966859847">Patreon members: #backers-game-request</a>'],
   community: ['Community requests', ''] };
 const TAGS = { official: '<span class="tag src-team">Official</span>', shared_by_users: '<span class="tag src-community">Shared by users</span>',
-  anti_cheat: '<span class="tag ac" title="Contains anti-cheat">Anti-cheat</span>' };
+  partial: '<span class="tag partial">Partial coverage</span>', anti_cheat: '<span class="tag ac" title="Contains anti-cheat">Anti-cheat</span>' };
 
 function requestsHtml(d) {
   const heads = [['Requests', 'num'], ['Status', '']];
