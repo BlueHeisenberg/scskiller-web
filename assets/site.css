@@ -391,7 +391,10 @@ main { display: block; }
 }
 
 /* results: one comparison table per game */
-.rt-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(28px, 4vw, 48px); align-items: start; }
+/* two columns that each stack their cards by height, read top to bottom, then the next column */
+.rt-grid { columns: 2; column-gap: clamp(28px, 4vw, 48px); }
+.rt-grid > .rt { break-inside: avoid; margin-bottom: clamp(28px, 4vw, 48px); }
+.rt-grid > .rt:last-child { margin-bottom: 0; }
 .rt-head { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px 16px; margin-bottom: 10px; }
 .rt-head h3 { font-size: 1.2rem; }
 .rt-tag { font: 600 0.7rem/1 var(--mono); letter-spacing: 0.1em; text-transform: uppercase; color: var(--cyan); padding: 6px 9px; border-radius: 999px; background: rgba(76, 194, 255, 0.08); box-shadow: inset 0 0 0 1px rgba(76, 194, 255, 0.35); }
@@ -413,7 +416,7 @@ main { display: block; }
 .rt .key td { font-size: 1.12rem; font-weight: 700; }
 .rt .key td:nth-child(2) { color: var(--amber); }
 .rt .key td:nth-child(3) { color: var(--cyan); }
-@media (max-width: 860px) { .rt-grid { grid-template-columns: minmax(0, 1fr); } }
+@media (max-width: 860px) { .rt-grid { columns: 1; } }
 @media (max-width: 560px) { .rt th, .rt td { padding: 8px 10px; } .rt td, .rt thead th:not(:first-child) { width: 1%; } }
 
 /* limits: fixes / can't fix, side by side */
