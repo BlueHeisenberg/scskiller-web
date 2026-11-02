@@ -1,0 +1,38 @@
+# The no-JS snapshot of /requests/ and /supported/: rebuilt from the public lists the API serves (the server publishes
+# them every hour at about :18), committed only when a list changed, not just its "Updated" time. app.js still shows the
+# live lists to visitors with JavaScript.
+name: lists
+on:
+  schedule:
+    - cron: "30 */6 * * *"
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: lists
+  cancel-in-progress: false
+jobs:
+  rebuild:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - name: Fetch the public lists
+        run: |
+          mkdir -p "$RUNNER_TEMP/lists"
+          for f in requests.json supported.json; do
+            curl -fsS -m 30 --retry 2 "https://api.scskiller.com/v1/content/$f" -o "$RUNNER_TEMP/lists/$f" ||
+              curl -fsS -m 30 --retry 2 "https://api.scskiller.io/v1/content/$f" -o "$RUNNER_TEMP/lists/$f"
+          done
+      - name: Rebuild the pages
+        run: python3 -I lists/build.py "$RUNNER_TEMP/lists" .
+      - name: Commit if a list changed
+        run: |
+          if git diff --quiet -I 'class="floor"' -- requests/index.html supported/index.html; then
+            echo "no list changed"; exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add requests/index.html supported/index.html
+          git commit -q -m "Lists: the no-JS snapshot from the API's lists"
+          git push -q
