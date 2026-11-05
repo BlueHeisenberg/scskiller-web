@@ -213,7 +213,7 @@ def main():
         sys.exit("refused: requests.json or supported.json isn't what app.js accepts; the pages stay as they are")
     parts = site_parts(root)
     page(root, "index.html", "", REQUEST_SIDE, render_requests(rq), rq["updated"], parts)
-    page(root, "supported.html", "Games SCSKiller can compile.", SUPPORTED_SIDE, render_supported(sp), sp["updated"], parts)
+    page(root, "supported.html", "Games SCSKiller can compile. This list isn't complete. Check the app first, your game may already be supported.", SUPPORTED_SIDE, render_supported(sp), sp["updated"], parts)
     print(f"built: {sum(1 for g in rq['games'] if g['section'] != 'engine')} requested ({rq['updated']}), {len(sp['games'])} supported ({sp['updated']})")
 
 
