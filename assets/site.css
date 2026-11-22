@@ -481,7 +481,11 @@ main { display: block; }
 .dl h2 { font-size: clamp(2.4rem, 5vw, 3.6rem); font-weight: 800; letter-spacing: -0.035em; max-width: none; }
 .dl .lead { margin: 18px 0 32px; }
 .btn-xl { padding: 18px 30px; font-size: 1.12rem; border-radius: 12px; gap: 12px; }
-.btn-xl .win { width: 18px; height: 18px; fill: currentColor; }
+.btn-xl .os { width: 18px; height: 18px; fill: currentColor; }
+.dl-oses { display: grid; gap: 22px; }
+.dl-os .dl-meta { margin-top: 10px; }
+.dl-note { margin: 8px 0 0; font-size: 0.88rem; color: var(--muted); }
+.tbd { outline: 1px dashed #ffb454; outline-offset: 3px; }  /* draft marker: cells waiting on facts */
 .dl-meta { margin: 14px 0 0; font: 500 0.8rem/1.4 var(--mono); color: var(--muted); letter-spacing: 0.04em; }
 .dl-links { list-style: none; margin: 30px 0 0; padding: 20px 0 0; border-top: 1px solid var(--line); display: grid; gap: 8px; font-size: 0.93rem; color: var(--muted); }
 .dl-links a { text-decoration: none; font-weight: 600; white-space: nowrap; }
@@ -593,7 +597,6 @@ pre.licence {
 }
 
 /* ---------- download: released/coming-soon switch and the unsigned-build notice ---------- */
-html.soon [data-live], html:not(.soon) [data-soon] { display: none; }
 .notice {
   width: min(780px, calc(100% - 24px)); max-height: calc(100vh - 24px); max-height: calc(100dvh - 24px); padding: 0; overflow: auto;
   color: var(--text); border: 1px solid var(--line-strong); border-radius: 16px;

@@ -8,7 +8,7 @@ The SCSKiller website. Plain HTML, CSS and JS: no build step, no dependencies, n
 | `support/` | Patreon tiers (linked from the app's welcome dialog as `/support`) |
 | `privacy/` | privacy policy |
 | `legal/` | aviso legal / legal notice, licence, trademarks |
-| `code-signing-policy/` | SignPath code signing policy |
+| `code-signing-policy/` | code signing policy |
 | `404.html` | not found |
 | `assets/bg.js` | the animated frame-time background (WebGL2, Canvas 2D fallback) |
 
@@ -32,8 +32,7 @@ Open http://localhost:8000. Paths are absolute (`/assets/...`), so serve from th
 
 `.nojekyll` makes Pages serve the files as they are.
 
-## Release flag
+## Downloads
 
-`RELEASED = false` in `assets/site.js` shows the "Coming soon" labels. Set it to `true` once the first release exists:
-every Download button then opens the "Windows may warn you" notice, which downloads from `DOWNLOAD_URL` (the public
-repo's latest release).
+The download section has one block per OS (`.dl-os[data-os]`), each linking the unversioned asset of the public repo's
+latest release. `assets/site.js` moves the visitor's OS first and points the `[data-dl]` buttons at it.

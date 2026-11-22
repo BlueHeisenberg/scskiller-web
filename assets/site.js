@@ -51,11 +51,17 @@
     jolt.addEventListener('animationend', () => jolt.classList.remove('hit'));
   }
 
-  // Download: RELEASED = false puts the "Coming soon" labels back. The unversioned asset each release uploads.
-  const RELEASED = true;
-  const DOWNLOAD_URL = 'https://github.com/BlueHeisenberg/SCSKiller/releases/latest/download/SCSKiller-Setup.exe';
-  document.documentElement.classList.toggle('soon', !RELEASED);
-  if (RELEASED) document.querySelectorAll('[data-dl]').forEach((a) => {
-    a.removeAttribute('aria-disabled'); a.removeAttribute('role'); a.href = DOWNLOAD_URL;
-  });
+  // Download: the visitor's OS leads and keeps the primary button, the others stay one click away. Phones and
+  // unknown systems pick none, and the [data-dl] buttons then just scroll to the choices.
+  const ua = navigator.userAgent;
+  const os = /Android|iPhone|iPad|CrOS/.test(ua) ? '' : /Windows/.test(ua) ? 'windows' : /Linux|X11/.test(ua) ? 'linux' : '';
+  const mine = os && document.querySelector(`.dl-os[data-os="${os}"]`);
+  if (mine) {
+    mine.parentElement.prepend(mine);
+    document.querySelectorAll('.dl-os').forEach((d) => {
+      if (d !== mine) d.querySelector('.btn').classList.remove('btn-primary', 'btn-shine');
+    });
+    const href = mine.querySelector('.btn').href;
+    document.querySelectorAll('[data-dl]').forEach((a) => { a.href = href; });
+  }
 })();

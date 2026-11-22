@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>SCSKiller: kill shader stutter before you play</title>
-<meta name="description" content="SCSKiller compiles your games' DirectX 12 shaders before you play, so they don't compile mid-game. Free and open source, for Windows.">
+<meta name="description" content="SCSKiller compiles your games' shaders into the GPU driver's cache before you play, so they don't compile mid-game. Free and open source, for Windows and Linux.">
 <meta name="theme-color" content="#05070a">
 <meta name="color-scheme" content="dark">
 <meta property="og:title" content="SCSKiller: Shader Compilation Stutter Killer">
@@ -50,13 +50,14 @@
         <h1>Kill shader <span class="jolt" data-text="stutter">stutter</span> <span class="hl">before you play.</span></h1>
         <p class="lede">SCSKiller builds your games' shaders ahead of time, so the game doesn't stop to compile them while you play.</p>
         <div class="cta">
-          <a class="btn btn-primary btn-shine" href="#download" data-dl>Download <small data-soon>coming soon</small></a>
+          <a class="btn btn-primary btn-shine" href="#download" data-dl>Download</a>
           <a class="btn" href="#why">Why games stutter</a>
           <a class="btn" href="https://github.com/BlueHeisenberg/SCSKiller">GitHub</a>
         </div>
         <ul class="chips" aria-label="At a glance">
           <li>Free and open source</li>
-          <li>Windows · DirectX 12</li>
+          <li>Windows · Linux</li>
+          <li>DirectX 12 · DirectX 11 · Vulkan</li>
           <li>NVIDIA · AMD</li>
         </ul>
       </div>
@@ -315,11 +316,11 @@
       <div class="qa" data-reveal>
         <details open><summary>Anti-cheat games?</summary><p>SCSKiller never launches them and compiles from their files only. The recorder stays out of a game that contains anti-cheat unless you enable it yourself, at your own risk. SCSKiller isn't responsible for bans.</p></details>
         <details><summary>Does it run while I play?</summary><p>It doesn't need to. The game reads the driver's cache on its own.</p></details>
-        <details><summary>Will Windows warn me?</summary><p>Probably, the first time. Releases aren't code-signed yet, and signing is in progress. Click More info, then Run anyway.</p></details>
-        <details><summary>Does it touch game files or drivers?</summary><p>It doesn't patch either. Only the optional recorder touches a game folder: it installs a small <code>d3d12.dll</code> and its settings file, and writes its recording, a log and the frame times next to the game. Turning it off removes what it installed, and uninstalling SCSKiller removes the rest.</p></details>
+        <details><summary>Will Windows warn me?</summary><p>Probably, the first time. Releases aren't code-signed yet. Click More info, then Run anyway. Updates never show it.</p></details>
+        <details><summary>Does it touch game files or drivers?</summary><p>It doesn't patch either. Only the optional recorder touches a game folder. In DirectX games it installs a small <code>d3d12.dll</code> and its settings file, and writes its recording, a log and the frame times next to the game. In Vulkan games it adds only a settings file to the game's folder, plus one registry value per game on Windows or one file per game in your Vulkan layer folder on Linux. Turning it off removes what it installed, and uninstalling SCSKiller removes the rest.</p></details>
         <details><summary>Does SCSKiller decrypt encrypted game files?</summary><p>Yes, with the game's AES key. If a game's files are encrypted, add its key under "Encrypted game files" → "Why?". SCSKiller checks the key against the game's files and keeps it on your PC only, never uploaded or shared. It never changes anything in the game's folder.</p></details>
         <details><summary>What about driver updates?</summary><p>An update clears the shader cache. SCSKiller notices and compiles again, on its own if you let it.</p></details>
-        <details><summary>What about Intel GPUs?</summary><p>Not supported yet: I don't have one to test on. If you'd like to sponsor an Intel Arc GPU, get in touch at <a href="mailto:contact@scskiller.com">contact@scskiller.com</a>.</p></details>
+        <details><summary>What about Intel GPUs?</summary><p class="tbd">Waiting on the matrix: on Linux, Intel GPUs on Mesa's drivers compile Vulkan and Proton games. Windows status to confirm.</p></details>
         <details><summary>Do I need an account?</summary><p>No. Signing in with Patreon only adds the <a href="/support/">supporter features</a>.</p></details>
       </div>
     </div>
@@ -330,17 +331,31 @@
     <div class="wrap dl-grid">
       <div class="dl-text" data-reveal>
         <span class="dl-icon" aria-hidden="true"><svg viewBox="0 0 32 32"><path d="M18 4 7 18h8l-2 10 12-15h-8l2-9z"/></svg></span>
-        <h2><span data-soon>Coming soon.</span><span data-live>Get SCSKiller.</span></h2>
+        <h2>Get SCSKiller.</h2>
         <p class="lead">The whole app is free. Open source, GPL-3.0-or-later. You don't need an account to use it.</p>
-        <!-- Download: RELEASED and DOWNLOAD_URL in assets/site.js. -->
-        <a class="btn btn-primary btn-shine btn-xl" role="link" aria-disabled="true" data-dl>
-          <svg class="win" viewBox="0 0 16 16" aria-hidden="true"><path d="M0 0h7.5v7.5H0zM8.5 0H16v7.5H8.5zM0 8.5h7.5V16H0zM8.5 8.5H16V16H8.5z"/></svg>
-          <span data-soon>Coming soon</span><span data-live>Download for Windows</span>
-        </a>
-        <p class="dl-meta"><span data-soon>First release on GitHub. </span>Windows, 64-bit.</p>
+        <!-- Each href is the unversioned asset every release uploads. site.js picks the visitor's OS. -->
+        <div class="dl-oses">
+          <div class="dl-os" data-os="windows">
+            <a class="btn btn-primary btn-shine btn-xl" href="https://github.com/BlueHeisenberg/SCSKiller/releases/latest/download/SCSKiller-Setup.exe">
+              <svg class="os" viewBox="0 0 16 16" aria-hidden="true"><path d="M0 0h7.5v7.5H0zM8.5 0H16v7.5H8.5zM0 8.5h7.5V16H0zM8.5 8.5H16V16H8.5z"/></svg>
+              Download for Windows
+            </a>
+            <p class="dl-meta">Installer for Windows 10 (2004) or 11, 64-bit. Or the <a href="https://github.com/BlueHeisenberg/SCSKiller/releases/latest">portable zip</a>.</p>
+            <p class="dl-meta tbd">GPUs and graphics APIs: waiting on the matrix.</p>
+            <p class="dl-note">Not code-signed yet. If Windows warns you, click More info, then Run anyway.</p>
+          </div>
+          <div class="dl-os" data-os="linux">
+            <a class="btn btn-primary btn-shine btn-xl" href="https://github.com/BlueHeisenberg/SCSKiller/releases/latest/download/SCSKiller-x86_64.AppImage">
+              <svg class="os" viewBox="0 0 16 16" aria-hidden="true"><path d="M2 2h12v9H2zM5 14h6M8 11v3" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>
+              Download for Linux
+            </a>
+            <p class="dl-meta">AppImage, x86_64. It installs for your user only, without root, and updates itself.</p>
+            <p class="dl-meta tbd">Distros, GPUs, graphics APIs and launchers: waiting on the matrix.</p>
+          </div>
+        </div>
         <ul class="dl-links">
-          <li data-live>Not code-signed yet: if Windows warns you, click More info, then Run anyway.</li>
-          <li><a href="https://github.com/BlueHeisenberg/SCSKiller">Source and releases on GitHub</a></li>
+          <li><a href="https://github.com/BlueHeisenberg/SCSKiller/releases/latest">All downloads and checksums</a></li>
+          <li><a href="https://github.com/BlueHeisenberg/SCSKiller">Source on GitHub</a></li>
           <li><a href="https://discord.gg/st7C4yCTcN">Join the Discord</a></li>
           <li><a href="https://www.patreon.com/SCSKiller">Support on Patreon</a></li>
           <li><a href="/code-signing-policy/">Code signing policy</a></li>
