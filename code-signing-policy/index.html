@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Code signing policy · SCSKiller</title>
-<meta name="description" content="How SCSKiller release binaries are built and signed.">
+<meta name="description" content="SCSKiller isn't code-signed yet. What will be signed, who approves it, and how to check a download.">
 <meta name="theme-color" content="#05070a">
 <meta name="color-scheme" content="dark">
 <link rel="canonical" href="https://scskiller.com/code-signing-policy/">
@@ -39,37 +39,36 @@
   <div class="wrap">
     <article class="panel">
       <h1>Code signing policy</h1>
-      <p class="updated">Last updated: 28 September 2026</p>
+      <p class="updated">Last updated: 22 November 2026</p>
 
       <h2 id="status">Status</h2>
-      <!-- APPLIED: once the application is sent, say "has applied ... It hasn't been granted yet."
-      SIGNED: when the certificate is issued, replace the next paragraph with:
-      <p>Free code signing provided by <a href="https://about.signpath.io/">SignPath.io</a>, certificate by <a href="https://signpath.org/">SignPath Foundation</a>.</p> -->
-      <p>SCSKiller will apply to the SignPath Foundation for free code signing. Until it is granted, releases are unsigned, and Windows may warn you when you run the installer.</p>
+      <p>SCSKiller isn't code-signed yet. Windows shows "Unknown publisher", and the first run will probably show SmartScreen's "Windows protected your PC": click More info, then Run anyway. Updates never show it.</p>
+      <p>Each release lists the SHA-256 of its downloads. Compare it with the file's (PowerShell: <code>Get-FileHash &lt;file&gt;</code>).</p>
 
-      <h2 id="scope">What is signed</h2>
+      <h2 id="scope">What will be signed</h2>
+      <p>Once signing is set up, only binaries built from the public repository's source by its GitHub Actions release workflow, from a stable release tag:</p>
       <ul>
-        <li>Stable releases only: the binaries built by the public repository's GitHub Actions workflow, from the tagged public source.</li>
-        <li>Beta and alpha builds are not signed under this policy.</li>
+        <li><code>SCSKiller.exe</code>, the app</li>
+        <li><code>cli\scskiller.exe</code> and <code>cli\scskillerw.exe</code>, the command line</li>
+        <li><code>native\scskiller_warm.exe</code> and <code>native\segheap\scskiller_warm.exe</code>, the compiler that runs outside the game</li>
+        <li><code>native\d3d12.dll</code>, the optional recorder</li>
+        <li><code>SCSKiller-Setup.exe</code> and <code>Update.exe</code></li>
       </ul>
+      <p>Upstream binaries and runtimes in the package aren't signed by this project. Alpha and beta builds aren't signed under this policy. Every signed file carries the product name SCSKiller and the release's version.</p>
 
       <h2 id="roles">Roles</h2>
       <table>
-        <tr><th scope="row">Committers and reviewers</th><td><a href="https://github.com/BlueHeisenberg">BlueHeisenberg</a></td></tr>
-        <tr><th scope="row">Approvers</th><td><a href="https://github.com/BlueHeisenberg">BlueHeisenberg</a></td></tr>
+        <tr><th scope="row">Author</th><td><a href="https://github.com/BlueHeisenberg">the maintainer</a></td></tr>
+        <tr><th scope="row">Reviewer</th><td>the maintainer, for every external contribution before it's merged</td></tr>
+        <tr><th scope="row">Approver</th><td>the maintainer, for each signing request</td></tr>
       </table>
-      <p>Every signing request is approved by hand.</p>
+      <p>Contributions are reviewed in public pull requests. Every signing request will be approved by hand. All members use multi-factor authentication on GitHub.</p>
 
       <h2 id="privacy">Privacy</h2>
-      <p>SCSKiller connects to the network only to:</p>
-      <ul>
-        <li>show its welcome text on first start;</li>
-        <li>check for and download updates;</li>
-        <li>download public files some games need to be read;</li>
-        <li>sign in with Patreon, and use the community database, if you choose to;</li>
-        <li>share recordings, if you opt in.</li>
-      </ul>
-      <p>Details are in the <a href="/privacy/">privacy policy</a>.</p>
+      <p>What SCSKiller connects to, and what it sends, is in the <a href="/privacy/">privacy policy</a>.</p>
+
+      <h2 id="reporting">Reporting</h2>
+      <p>Report a signed binary you believe is malicious or misused through <a href="https://github.com/BlueHeisenberg/SCSKiller/blob/main/SECURITY.md">SECURITY.md</a>.</p>
     </article>
   </div>
 </main>
