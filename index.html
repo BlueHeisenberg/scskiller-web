@@ -58,7 +58,7 @@
           <li>Free and open source</li>
           <li>Windows · Linux</li>
           <li>DirectX 12 · DirectX 11 · Vulkan</li>
-          <li>NVIDIA · AMD</li>
+          <li>NVIDIA · AMD · Intel (experimental)</li>
         </ul>
       </div>
       <aside class="overlay" data-overlay aria-hidden="true">
@@ -90,7 +90,7 @@
           <p class="lead strong">SCSKiller compiles them before you play.</p>
         </div>
       </header>
-      <figure class="ftchart" data-reveal aria-label="Illustration: with a cold cache the game stops for a shader compile and a frame shoots past 20 ms; with SCSKiller the shaders are compiled before launch and every frame stays short.">
+      <figure class="ftchart" data-reveal aria-label="Illustration: with a cold cache the game stops for a shader compile and a frame shoots past 20 ms. With SCSKiller the shaders are compiled before launch and every frame stays short.">
         <div class="ft-legend" aria-hidden="true">
           <span class="lg-amber">Cold cache</span>
           <span class="lg-cyan">With SCSKiller</span>
@@ -320,7 +320,7 @@
         <details><summary>Does it touch game files or drivers?</summary><p>It doesn't patch either. Only the optional recorder touches a game folder. In DirectX games it installs a small recorder DLL, such as <code>d3d12.dll</code>, and its settings file, and writes its recording, a log and the frame times next to the game. In Vulkan games it adds only a settings file to the game's folder, plus one registry value per game on Windows or one file per game in your Vulkan layer folder on Linux. Turning it off removes what it installed, and uninstalling SCSKiller removes the rest.</p></details>
         <details><summary>Does SCSKiller decrypt encrypted game files?</summary><p>Yes, with the game's AES key. If a game's files are encrypted, add its key under "Encrypted game files" → "Why?". SCSKiller checks the key against the game's files and keeps it on your PC only, never uploaded or shared. It never changes anything in the game's folder.</p></details>
         <details><summary>What about driver updates?</summary><p>An update clears the shader cache. SCSKiller notices and compiles again, on its own if you let it.</p></details>
-        <details><summary>What about Intel GPUs?</summary><p class="tbd">Waiting on the matrix: on Linux, Intel GPUs on Mesa's drivers compile Vulkan and Proton games. Windows status to confirm.</p></details>
+        <details><summary>What about Intel GPUs?</summary><p>Experimental. On Windows, turn on "Experimental: compile on Intel GPUs" in Settings. It's only measured on Intel Arc. DirectX 12, 11 and 10 games compile, Vulkan games don't yet. On Linux, Intel GPUs with Mesa's ANV driver compile without a switch. On both, DirectX 12 games need a recording first.</p></details>
         <details><summary>Do I need an account?</summary><p>No. Signing in with Patreon only adds the <a href="/support/">supporter features</a>.</p></details>
       </div>
     </div>
@@ -341,7 +341,8 @@
               Download for Windows
             </a>
             <p class="dl-meta">Installer for Windows 10 (2004) or 11, 64-bit. Or the <a href="https://github.com/BlueHeisenberg/SCSKiller/releases/latest">portable zip</a>.</p>
-            <p class="dl-meta tbd">GPUs and graphics APIs: waiting on the matrix.</p>
+            <p class="dl-note">NVIDIA or AMD: DirectX 12, 11 and 10 games, and Vulkan games. On AMD, DirectX 11 games need a short recording for part of their shaders. DirectX 9 isn't supported yet.</p>
+            <p class="dl-note">Intel is experimental: turn it on in Settings. DirectX 12, 11 and 10 games, no Vulkan yet.</p>
             <p class="dl-note">Not code-signed yet. If Windows warns you, click More info, then Run anyway.</p>
           </div>
           <div class="dl-os" data-os="linux">
@@ -350,7 +351,8 @@
               Download for Linux
             </a>
             <p class="dl-meta">AppImage, x86_64. It installs for your user only, without root, and updates itself.</p>
-            <p class="dl-meta tbd">Distros, GPUs, graphics APIs and launchers: waiting on the matrix.</p>
+            <p class="dl-note">NVIDIA with NVIDIA's driver or NVK, or AMD with Mesa's RADV: DirectX 12 games under Proton, and Vulkan games. Intel with Mesa's ANV is experimental. DirectX 9 isn't supported yet.</p>
+            <p class="dl-note">Games from Steam, Heroic, Lutris and Faugus, or ones you add. With Steam as a Flatpak, games compile on NVIDIA only, Vulkan games don't, and none can be recorded.</p>
           </div>
         </div>
         <ul class="dl-links">
