@@ -485,7 +485,6 @@ main { display: block; }
 .dl-oses { display: grid; gap: 22px; }
 .dl-os .dl-meta { margin-top: 10px; }
 .dl-note { margin: 8px 0 0; font-size: 0.88rem; color: var(--muted); }
-.tbd { outline: 1px dashed #ffb454; outline-offset: 3px; }  /* draft marker: cells waiting on facts */
 .dl-meta { margin: 14px 0 0; font: 500 0.8rem/1.4 var(--mono); color: var(--muted); letter-spacing: 0.04em; }
 .dl-links { list-style: none; margin: 30px 0 0; padding: 20px 0 0; border-top: 1px solid var(--line); display: grid; gap: 8px; font-size: 0.93rem; color: var(--muted); }
 .dl-links a { text-decoration: none; font-weight: 600; white-space: nowrap; }
