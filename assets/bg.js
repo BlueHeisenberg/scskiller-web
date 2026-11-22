@@ -13,7 +13,7 @@
   const band = canvas.dataset.variant === 'band';
   const Y0 = band ? 0.2 : 0.17, AMP = band ? 0.55 : 0.5;   // baseline and 100 ms height, fractions of canvas height
   const L = 13, SW0 = 6, SWD = 1.5, OFF0 = 12.3, OFF1 = 12.9, HITCH = 0.2;   // loop, fix wave start/length, 20 ms
-  const T_START = +(new URLSearchParams(location.search).get('t') || (band ? 9 : 3.2));   // ?t= pins the start (screenshots)
+  const T_START = +(new URLSearchParams(location.search).get('t') || (band ? 9 : 7.6));   // ?t= pins the start (screenshots). 7.6: just after the fix wave, so it opens flat
   // [frame width css px, frames/s, seed, amp, alpha, glow css px, reach, parallax]
   const MAIN = [6, 20, 1, 1.0, 1.0, 7, 3, 0], GHOST = [9, 13, 7, 0.72, 0.32, 14, 2, 14], FAR = [14, 8, 13, 0.5, 0.16, 22, 1, 30];
   const SPEED = MAIN[0] * MAIN[1];   // css px/s the main trace scrolls
@@ -63,7 +63,7 @@
 
   // ---- state ----
   let t = T_START, cw = 1, ch = 1, scale = 1, headX = 0, headV = 0, lastI = -1, count = 0, wasOn = null, lastPh = 0;
-  let flash = 0, pulse = 0, glitch = 0, shakeX = 0, shakeY = 0, warmth = 1, hudT = 0;
+  let flash = 0, pulse = 0, glitch = 0, shakeX = 0, shakeY = 0, warmth = isOn(T_START % L) ? 0 : 1, hudT = 0;
   let running = false, visible = !document.hidden, onScreen = true, raf = 0, last = 0;
   const mouse = { x: 0, y: 0, tx: 0, ty: 0, seen: false };
   const rings = [];   // {x, y, age, s} s > 0 warm, s < 0 cyan
