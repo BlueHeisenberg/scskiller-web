@@ -57,7 +57,11 @@ def page(out, file, lede, side, body, updated, site):
     a, own, path = "/assets/", "/lists/", out / SLUG[file] / "index.html"
     meta = (f'<meta name="description" content="{esc(DESCRIPTION[file])}">\n'
             f'<meta name="theme-color" content="#05070a">\n<meta name="color-scheme" content="dark">\n'
-            f'<link rel="canonical" href="{SITE}/{SLUG[file]}/">')
+            f'<link rel="canonical" href="{SITE}/{SLUG[file]}/">\n'
+            f'<meta property="og:title" content="{esc(title)} · SCSKiller">\n'
+            f'<meta property="og:description" content="{esc(DESCRIPTION[file])}">\n'
+            f'<meta property="og:type" content="website">\n<meta property="og:url" content="{SITE}/{SLUG[file]}/">\n'
+            f'<meta property="og:site_name" content="SCSKiller">\n<meta name="twitter:card" content="summary">')
     nav = re.sub(r'href="/(requests|supported)/"', r'href="../\1/"', site["nav"]).replace(
         f'href="../{SLUG[file]}/"', f'href="../{SLUG[file]}/" aria-current="page"')
     path.parent.mkdir(parents=True, exist_ok=True)
